@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.0.1](https://github.com/Yggdrasil-Labs/valhalla-user/compare/midgard-backend-template-v1.0.0...midgard-backend-template-v1.0.1) (2025-12-06)
+
+
+### Continuous Integration
+
+* **deps:** bump actions-ecosystem/action-add-labels from 1.1.0 to 1.1.3 ([6928f59](https://github.com/Yggdrasil-Labs/valhalla-user/commit/6928f59501131030bab52851d2302d3879c94425))
+* **deps:** bump actions/github-script from 7 to 8 ([d5ed79c](https://github.com/Yggdrasil-Labs/valhalla-user/commit/d5ed79c1e4a909f3f13c91e8873f03aa15bd3474))
+* **deps:** bump actions/setup-java from 4 to 5 ([250a870](https://github.com/Yggdrasil-Labs/valhalla-user/commit/250a870aa544def4e862f96d7d8fe7317e927a53))
+* **deps:** bump softprops/action-gh-release from 1 to 2 ([7d3dbf3](https://github.com/Yggdrasil-Labs/valhalla-user/commit/7d3dbf3bd0adfc8a2b93a6def8c660fc6509f5b0))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump jakarta.validation:jakarta.validation-api ([7358678](https://github.com/Yggdrasil-Labs/valhalla-user/commit/7358678631515a9b2e89f5ab72719a67d0ac5baf))
+
 ## 1.0.0 (2025-12-06)
 
 
