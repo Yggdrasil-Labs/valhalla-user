@@ -1,10 +1,10 @@
-# midgard-backend-template
+# valhalla-user
 
-> 中庭 - 基于 COLA 5.0 的 DDD 架构模板项目
+> 英灵殿 - 用户管理服务（核心服务）
 
 ## 项目简介
 
-Midgard（中庭）是基于 COLA 5.0 DDD 架构的微服务模板项目，用于快速创建符合 DDD 最佳实践的后端服务。
+Valhalla（英灵殿）用户管理服务，负责用户信息管理、操作日志记录、强制下线、用户禁用等核心功能。
 
 ## 技术栈
 
@@ -257,7 +257,7 @@ git clone <template-repo-url>
 # 全局替换：com.yggdrasil.labs → com.your.company
 
 # 3. 修改项目名
-# pom.xml: midgard-backend-template → your-service-name
+# pom.xml: valhalla-user → your-service-name
 
 # 4. 配置环境
 # start/src/main/resources/application.yml

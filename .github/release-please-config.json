@@ -1,9 +1,9 @@
 {
-  "bootstrap-sha": "3c0f4de5c0f327555ea504123638c8986fdc274c",
+  "bootstrap-sha": "5e4083e29153fe65960535a6cfd3cc926ba48346",
   "packages": {
     ".": {
       "release-type": "simple",
-      "package-name": "midgard-backend-template",
+      "package-name": "valhalla-user",
       "changelog-path": "CHANGELOG.md",
       "include-v-in-tag": true,
       "extra-files": [

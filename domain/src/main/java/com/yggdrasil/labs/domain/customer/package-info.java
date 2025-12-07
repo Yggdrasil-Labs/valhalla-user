@@ -28,8 +28,6 @@
  *   <li>避免贫血模型，领域对象应包含行为
  * </ul>
  *
- * <p>这是 Midgard 模板项目的一部分，用于快速开始其他具体的业务项目。
- *
- * @author Midgard Team
+ * @author YoungerYang-Y
  */
 package com.yggdrasil.labs.domain.customer;
