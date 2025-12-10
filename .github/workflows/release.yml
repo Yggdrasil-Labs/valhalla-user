@@ -15,14 +15,14 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
         with:
           # push 事件时，使用 github.ref（已经是 tag ref）
           ref: ${{ github.ref }}
           fetch-depth: 0
 
       - name: Set up JDK ${{ env.JAVA_VERSION }}
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@f2beeb24e141e01a676f977032f5a29d81c9e27e
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
@@ -42,54 +42,21 @@ jobs:
       - name: Verify build (format check + compile)
         run: ./mvnw -B -U spotless:check clean package -DskipTests
 
-  release:
+  build-release:
     runs-on: ubuntu-latest
     needs: [ build-verify ]
     permissions:
       contents: read
-      packages: write
+      packages: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
         with:
           # push 事件时，使用 github.ref（已经是 tag ref）
           ref: ${{ github.ref }}
           fetch-depth: 0
 
       - name: Set up JDK ${{ env.JAVA_VERSION }}
-        uses: actions/setup-java@v5
-        with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: 'temurin'
-          cache: 'maven'
-
-      - name: Make Maven Wrapper executable
-        run: |
-          if [ -f "mvnw" ]; then
-            chmod +x mvnw
-            echo "Maven Wrapper made executable"
-          else
-            echo "Error: mvnw not found"
-            exit 1
-          fi
-
-      - name: Final verification
-        run: ./mvnw -B -U clean package -DskipTests
-
-  publish-gpr:
-    runs-on: ubuntu-latest
-    needs: [ release ]
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          # push 事件时，使用 github.ref（已经是 tag ref）
-          ref: ${{ github.ref }}
-          fetch-depth: 0
-
-      - name: Set up JDK ${{ env.JAVA_VERSION }}
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@f2beeb24e141e01a676f977032f5a29d81c9e27e
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
@@ -185,23 +152,14 @@ jobs:
           echo "Verifying jar files were built..."
           find . -name "*.jar" -path "*/target/*" -not -path "*/original-*" | head -10
 
-      - name: Publish to GitHub Packages (Maven)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          VERSION="${{ steps.get_version.outputs.version }}"
-          ./mvnw -B -U -DskipTests=true -Drevision=$VERSION \
-            -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/${{ github.repository }} \
-            deploy
-
   create-github-release:
     runs-on: ubuntu-latest
-    needs: [ publish-gpr ]
+    needs: [ build-release ]
     permissions:
       contents: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
         with:
           ref: ${{ github.ref }}
           fetch-depth: 0
@@ -223,12 +181,12 @@ jobs:
           TAG_NAME="${{ steps.get_version.outputs.tag }}"
           VERSION="${{ steps.get_version.outputs.version }}"
           
-          # 默认 release notes
-          DEFAULT_NOTES="## Release $VERSION
-
-          Release $VERSION is now available.
-
-          See the [changelog](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details."
+          # 默认 release notes（带图标）
+          DEFAULT_NOTES="## 🚀 Release $VERSION
+          
+          Release $VERSION is now available! 🎉
+          
+          📝 See the [changelog](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details."
           
           # 检查 CHANGELOG.md 是否存在
           if [ ! -f "CHANGELOG.md" ]; then
@@ -243,10 +201,15 @@ jobs:
             # 尝试提取对应版本的 release notes
             # 使用 awk 提取从版本标题到下一个版本标题（或文件结尾）之间的内容
             EXTRACTED=$(awk -v version="$VERSION" '
-              BEGIN { found=0; in_section=0 }
+              BEGIN {
+                found=0
+                in_section=0
+              }
               /^## \[/ || /^## [0-9]/ {
                 if (in_section) exit
-                if ($0 ~ "\\[" version "\\]" || $0 ~ "^## " version) {
+                # 使用 index() 进行字面量字符串匹配，避免正则表达式元字符问题
+                # 检查格式: ## [1.0.0] 或 ## 1.0.0
+                if (index($0, "[" version "]") > 0 || index($0, "## " version) == 1) {
                   found=1
                   in_section=1
                   print
@@ -257,8 +220,24 @@ jobs:
             ' CHANGELOG.md)
             
             if [ -n "$EXTRACTED" ] && [ ${#EXTRACTED} -gt 10 ]; then
-              RELEASE_NOTES="$EXTRACTED"
-              echo "Successfully extracted release notes from CHANGELOG.md"
+              # 只为版本标题添加火箭图标（CHANGELOG已经包含章节和条目的图标）
+              CHANGELOG_CONTENT=$(echo "$EXTRACTED" | sed \
+                -e 's/^## \[\([^]]*\)\]/## 🚀 Release \1/g' \
+                -e 's/^## \([0-9][^ ]*\) /## 🚀 Release \1 /g' \
+                -e 's/BREAKING CHANGE/💥 BREAKING CHANGE/g' \
+                -e 's/Breaking Change/💥 Breaking Change/g')
+              
+              # 分步骤构建 release notes，添加发布横幅和安装说明
+              RELEASE_NOTES=""
+              RELEASE_NOTES="${RELEASE_NOTES}🎉 **Release ${VERSION} is now available!**"
+              RELEASE_NOTES="${RELEASE_NOTES}"$'\n'$'\n'
+              RELEASE_NOTES="${RELEASE_NOTES}${CHANGELOG_CONTENT}"
+              RELEASE_NOTES="${RELEASE_NOTES}"$'\n'$'\n'
+              RELEASE_NOTES="${RELEASE_NOTES}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+              RELEASE_NOTES="${RELEASE_NOTES}"$'\n'$'\n'
+              RELEASE_NOTES="${RELEASE_NOTES}📖 [View Full Changelog](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) | 📋 [Documentation](https://github.com/${{ github.repository }}/blob/main/README.md)"
+              
+              echo "Successfully extracted and enhanced release notes from CHANGELOG.md"
             else
               echo "Could not extract release notes from CHANGELOG.md, using default"
               RELEASE_NOTES="$DEFAULT_NOTES"
@@ -277,7 +256,7 @@ jobs:
           echo ""
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844
         with:
           tag_name: ${{ steps.get_version.outputs.tag }}
           name: Release ${{ steps.get_version.outputs.version }}
@@ -290,12 +269,12 @@ jobs:
 
   update-dev-version:
     runs-on: ubuntu-latest
-    needs: [ publish-gpr ]
+    needs: [ build-release ]
     permissions:
       contents: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
@@ -340,43 +319,14 @@ jobs:
           git checkout main
           git pull origin main
 
-      - name: Update version and bootstrap-sha
+      - name: Update version
         run: |
           NEXT_VERSION="${{ steps.next_version.outputs.next_version }}"
-          TAG_SHA="${{ steps.get_version.outputs.tag_sha }}"
           
           # 更新 pom.xml 中的版本号
           echo "Updating pom.xml to version: $NEXT_VERSION"
           sed -i.bak "s|<revision>[^<]*</revision>|<revision>$NEXT_VERSION</revision>|g" pom.xml
           rm -f pom.xml.bak
-          
-          # 更新 release-please-config.json 中的 bootstrap-sha
-          if [ -n "$TAG_SHA" ] && [ -f ".github/release-please-config.json" ]; then
-            echo "Updating bootstrap-sha to: $TAG_SHA"
-            # 使用 jq 更新 JSON（如果可用），否则使用 sed
-            if command -v jq &> /dev/null; then
-              OLD_SHA=$(jq -r '.bootstrap-sha' .github/release-please-config.json)
-              if [ "$OLD_SHA" = "$TAG_SHA" ]; then
-                echo "✓ bootstrap-sha is already up to date: ${TAG_SHA:0:7}"
-              else
-                jq --arg sha "$TAG_SHA" '.bootstrap-sha = $sha' .github/release-please-config.json > .github/release-please-config.json.tmp
-                mv .github/release-please-config.json.tmp .github/release-please-config.json
-                echo "✓ Updated bootstrap-sha from ${OLD_SHA:0:7} to ${TAG_SHA:0:7}"
-              fi
-            else
-              # 使用 sed 作为后备方案
-              OLD_SHA=$(grep -o '"bootstrap-sha": "[^"]*"' .github/release-please-config.json | cut -d'"' -f4)
-              if [ "$OLD_SHA" = "$TAG_SHA" ]; then
-                echo "✓ bootstrap-sha is already up to date: ${TAG_SHA:0:7}"
-              else
-                sed -i.bak "s|\"bootstrap-sha\": \"[^\"]*\"|\"bootstrap-sha\": \"$TAG_SHA\"|g" .github/release-please-config.json
-                rm -f .github/release-please-config.json.bak
-                echo "✓ Updated bootstrap-sha from ${OLD_SHA:0:7} to ${TAG_SHA:0:7}"
-              fi
-            fi
-          else
-            echo "⚠️  Skipping bootstrap-sha update (TAG_SHA: $TAG_SHA, config file exists: $([ -f .github/release-please-config.json ] && echo 'yes' || echo 'no'))"
-          fi
           
           echo "Updated pom.xml content:"
           grep -A 2 -B 2 "<revision>" pom.xml
@@ -392,23 +342,15 @@ jobs:
           
           # 添加所有更改的文件
           git add pom.xml
-          if [ -f ".github/release-please-config.json" ]; then
-            git add .github/release-please-config.json
-          fi
           
           # 检查是否有更改
           if git diff --staged --quiet; then
             echo "No changes to commit (version may already be updated)"
           else
             NEXT_VERSION="${{ steps.next_version.outputs.next_version }}"
-            TAG_SHA="${{ steps.get_version.outputs.tag_sha }}"
             
             # 构建提交消息
-            if [ -n "$TAG_SHA" ] && git diff --staged --name-only | grep -q "release-please-config.json"; then
-              COMMIT_MSG="chore: bump version to $NEXT_VERSION for next development cycle"$'\n'$'\n'"Update bootstrap-sha to ${TAG_SHA:0:7}"
-            else
-              COMMIT_MSG="chore: bump version to $NEXT_VERSION for next development cycle"
-            fi
+            COMMIT_MSG="chore: bump version to $NEXT_VERSION for next development cycle"
             
             git commit -m "$COMMIT_MSG"
             
@@ -416,9 +358,4 @@ jobs:
             git push origin main
             
             echo "Successfully updated version to $NEXT_VERSION"
-            if [ -n "$TAG_SHA" ]; then
-              echo "Successfully updated bootstrap-sha to ${TAG_SHA:0:7}"
-            fi
           fi
-
-

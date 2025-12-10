@@ -1,54 +1,56 @@
 {
-  "bootstrap-sha": "5e4083e29153fe65960535a6cfd3cc926ba48346",
   "packages": {
     ".": {
       "release-type": "simple",
-      "package-name": "valhalla-user",
       "changelog-path": "CHANGELOG.md",
       "include-v-in-tag": true,
       "extra-files": [
         {
           "type": "xml",
           "path": "pom.xml",
-          "xpath": "/project/properties/revision"
+          "xpath": "//*[local-name()='project']/*[local-name()='properties']/*[local-name()='revision']"
         }
       ],
       "changelog-sections": [
         {
           "type": "feat",
-          "section": "Features"
+          "section": "✨ Features"
         },
         {
           "type": "fix",
-          "section": "Bug Fixes"
+          "section": "🐛 Bug Fixes"
         },
         {
           "type": "docs",
-          "section": "Documentation"
+          "section": "📝 Documentation"
         },
         {
           "type": "refactor",
-          "section": "Code Refactoring"
+          "section": "♻️ Code Refactoring"
         },
         {
           "type": "perf",
-          "section": "Performance Improvements"
+          "section": "⚡ Performance Improvements"
         },
         {
           "type": "test",
-          "section": "Tests"
+          "section": "✅ Tests"
         },
         {
           "type": "build",
-          "section": "Build System"
+          "section": "🔨 Build System"
         },
         {
           "type": "ci",
-          "section": "Continuous Integration"
+          "section": "👷 Continuous Integration"
         },
         {
           "type": "chore",
-          "section": "Miscellaneous Chores"
+          "section": "🔧 Miscellaneous Chores"
+        },
+        {
+          "type": "style",
+          "section": "💄 Code Style"
         }
       ]
     }
