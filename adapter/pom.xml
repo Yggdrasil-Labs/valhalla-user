@@ -19,6 +19,12 @@
             <artifactId>client</artifactId>
         </dependency>
 
+        <!-- COLA DTO：用于 Response、SingleResponse、MultiResponse 等 -->
+        <dependency>
+            <groupId>com.alibaba.cola</groupId>
+            <artifactId>cola-component-dto</artifactId>
+        </dependency>
+
         <!-- DTO 转换：使用 MapStruct 进行 Web Request ↔ Client Cmd 转换 -->
         <dependency>
             <groupId>org.mapstruct</groupId>
