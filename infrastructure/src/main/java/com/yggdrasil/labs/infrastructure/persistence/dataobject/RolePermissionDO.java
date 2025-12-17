@@ -3,7 +3,9 @@ package com.yggdrasil.labs.infrastructure.persistence.dataobject;
 import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.yggdrasil.labs.mybatis.annotation.AutoMybatis;
 
@@ -18,6 +20,10 @@ import lombok.Data;
 @TableName("role_permission")
 @AutoMybatis
 public class RolePermissionDO {
+
+    /** 主键ID */
+    @TableId(type = IdType.AUTO)
+    private Long id;
 
     /** 角色ID */
     private Long roleId;

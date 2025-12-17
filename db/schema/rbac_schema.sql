@@ -76,31 +76,37 @@ CREATE TABLE IF NOT EXISTS `api` (
     KEY `idx_api_code_deleted` (`api_code`, `deleted_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='接口表';
 
--- 权限接口关联表（权限与接口的一对多关系，使用联合主键）
+-- 权限接口关联表（权限与接口的一对多关系）
 CREATE TABLE IF NOT EXISTS `permission_api` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键ID',
     `permission_id` BIGINT NOT NULL COMMENT '权限ID',
     `api_id` BIGINT NOT NULL COMMENT '接口ID',
     `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    PRIMARY KEY (`permission_id`, `api_id`),
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_permission_api` (`permission_id`, `api_id`),
     KEY `idx_api_id` (`api_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='权限接口关联表';
 
--- 角色权限关联表（多对多，使用联合主键）
+-- 角色权限关联表（多对多）
 CREATE TABLE IF NOT EXISTS `role_permission` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键ID',
     `role_id` BIGINT NOT NULL COMMENT '角色ID',
     `permission_id` BIGINT NOT NULL COMMENT '权限ID',
     `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    PRIMARY KEY (`role_id`, `permission_id`),
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_role_permission` (`role_id`, `permission_id`),
     KEY `idx_permission_id` (`permission_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='角色权限关联表';
 
--- 用户角色关联表（多对多，使用联合主键）
+-- 用户角色关联表（多对多）
 CREATE TABLE IF NOT EXISTS `user_role` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键ID',
     `user_id` BIGINT NOT NULL COMMENT '用户ID',
     `role_id` BIGINT NOT NULL COMMENT '角色ID',
     `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`user_id`, `role_id`),
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_user_role` (`user_id`, `role_id`),
     KEY `idx_role_id` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户角色关联表';
 
