@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/Yggdrasil-Labs/valhalla-user/compare/v1.0.0...v1.0.1) (2025-12-21)
+
+
+### 👷 Continuous Integration
+
+* **release:** build-verify时401 ([cfcbe3d](https://github.com/Yggdrasil-Labs/valhalla-user/commit/cfcbe3d5da3a570b08e6fc56334f00e72007d995))
+
 ## 1.0.0 (2025-12-21)
 
 
