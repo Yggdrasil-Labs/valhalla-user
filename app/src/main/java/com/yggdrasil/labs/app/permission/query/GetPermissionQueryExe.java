@@ -40,8 +40,10 @@ public class GetPermissionQueryExe {
 
         // 转换为CO
         PermissionCO permissionCO = permissionAssembler.toCO(permission);
-        // 设置API ID列表
-        permissionCO.setApiIds(permission.getApiIds());
+        // 设置API ID列表（转换为String类型）
+        if (permission.getApiIds() != null) {
+            permissionCO.setApiIds(permission.getApiIds().stream().map(String::valueOf).toList());
+        }
 
         return SingleResponse.of(permissionCO);
     }

@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 public class UserCO extends DTO {
 
     /** 用户ID */
-    private Long id;
+    private String id;
 
     /** 用户名 */
     private String username;
@@ -42,7 +42,7 @@ public class UserCO extends DTO {
     private String metadata;
 
     /** 角色ID列表 */
-    private List<Long> roleIds;
+    private List<String> roleIds;
 
     /** 创建时间 */
     private LocalDateTime createTime;

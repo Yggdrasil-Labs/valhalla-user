@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 public class PermissionCO extends DTO {
 
     /** 权限ID */
-    private Long id;
+    private String id;
 
     /** 模块 */
     private String module;
@@ -42,7 +42,7 @@ public class PermissionCO extends DTO {
     private String metadata;
 
     /** API ID列表 */
-    private List<Long> apiIds;
+    private List<String> apiIds;
 
     /** 创建时间 */
     private LocalDateTime createTime;

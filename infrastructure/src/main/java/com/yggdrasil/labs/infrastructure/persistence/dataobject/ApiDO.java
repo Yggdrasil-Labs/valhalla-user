@@ -23,7 +23,7 @@ import lombok.Data;
 public class ApiDO {
 
     /** 接口ID（雪花ID） */
-    @TableId(type = IdType.INPUT)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /** 接口代码 */

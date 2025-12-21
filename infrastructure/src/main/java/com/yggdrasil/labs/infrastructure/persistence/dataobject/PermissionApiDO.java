@@ -22,7 +22,7 @@ import lombok.Data;
 public class PermissionApiDO {
 
     /** 主键ID */
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /** 权限ID */

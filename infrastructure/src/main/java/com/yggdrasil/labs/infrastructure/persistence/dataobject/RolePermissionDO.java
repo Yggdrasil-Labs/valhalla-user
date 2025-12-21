@@ -22,7 +22,7 @@ import lombok.Data;
 public class RolePermissionDO {
 
     /** 主键ID */
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /** 角色ID */

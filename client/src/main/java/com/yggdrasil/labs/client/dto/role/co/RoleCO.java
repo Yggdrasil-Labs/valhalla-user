@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 public class RoleCO extends DTO {
 
     /** 角色ID */
-    private Long id;
+    private String id;
 
     /** 角色代码 */
     private String roleCode;
@@ -36,7 +36,7 @@ public class RoleCO extends DTO {
     private String metadata;
 
     /** 权限ID列表 */
-    private List<Long> permissionIds;
+    private List<String> permissionIds;
 
     /** 创建时间 */
     private LocalDateTime createTime;

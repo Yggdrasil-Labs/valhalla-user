@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
 public class ApiCO extends DTO {
 
     /** 接口ID */
-    private Long id;
+    private String id;
 
     /** 接口代码 */
     private String apiCode;

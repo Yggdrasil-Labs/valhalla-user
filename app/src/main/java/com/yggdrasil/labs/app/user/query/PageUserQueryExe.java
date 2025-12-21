@@ -50,8 +50,13 @@ public class PageUserQueryExe {
                         .map(
                                 user -> {
                                     UserCO userCO = userAssembler.toCO(user);
-                                    // 设置角色ID列表
-                                    userCO.setRoleIds(user.getRoleIds());
+                                    // 设置角色ID列表（转换为String类型）
+                                    if (user.getRoleIds() != null) {
+                                        userCO.setRoleIds(
+                                                user.getRoleIds().stream()
+                                                        .map(String::valueOf)
+                                                        .toList());
+                                    }
                                     return userCO;
                                 })
                         .toList();

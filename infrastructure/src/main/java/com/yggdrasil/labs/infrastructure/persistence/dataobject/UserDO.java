@@ -24,7 +24,7 @@ import lombok.Data;
 public class UserDO {
 
     /** 用户ID（雪花ID） */
-    @TableId(type = IdType.INPUT)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /** 用户名 */

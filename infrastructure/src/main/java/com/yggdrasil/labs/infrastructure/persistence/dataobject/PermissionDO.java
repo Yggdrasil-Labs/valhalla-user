@@ -23,7 +23,7 @@ import lombok.Data;
 public class PermissionDO {
 
     /** 权限ID（雪花ID） */
-    @TableId(type = IdType.INPUT)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /** 模块（如user） */

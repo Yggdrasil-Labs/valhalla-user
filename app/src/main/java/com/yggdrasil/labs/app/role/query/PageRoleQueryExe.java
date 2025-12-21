@@ -50,8 +50,13 @@ public class PageRoleQueryExe {
                         .map(
                                 role -> {
                                     RoleCO roleCO = roleAssembler.toCO(role);
-                                    // 设置权限ID列表
-                                    roleCO.setPermissionIds(role.getPermissionIds());
+                                    // 设置权限ID列表（转换为String类型）
+                                    if (role.getPermissionIds() != null) {
+                                        roleCO.setPermissionIds(
+                                                role.getPermissionIds().stream()
+                                                        .map(String::valueOf)
+                                                        .toList());
+                                    }
                                     return roleCO;
                                 })
                         .toList();

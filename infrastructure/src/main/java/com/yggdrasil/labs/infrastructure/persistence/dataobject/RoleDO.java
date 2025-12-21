@@ -23,7 +23,7 @@ import lombok.Data;
 public class RoleDO {
 
     /** 角色ID（雪花ID） */
-    @TableId(type = IdType.INPUT)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /** 角色代码：ADMIN-管理员，USER-用户，GUEST-游客 */

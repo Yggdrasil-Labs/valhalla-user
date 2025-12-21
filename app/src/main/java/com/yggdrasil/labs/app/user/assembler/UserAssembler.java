@@ -25,6 +25,7 @@ public interface UserAssembler {
      * @param user 领域实体
      * @return 客户对象
      */
+    @Mapping(target = "id", source = "id", qualifiedByName = "longToString")
     @Mapping(target = "status", source = "status", qualifiedByName = "toStatusCode")
     @Mapping(target = "roleIds", ignore = true)
     UserCO toCO(User user);
@@ -41,5 +42,19 @@ public interface UserAssembler {
             return null;
         }
         return status.getCode();
+    }
+
+    /**
+     * Long转String
+     *
+     * @param id Long类型的ID
+     * @return String类型的ID
+     */
+    @Named("longToString")
+    default String longToString(Long id) {
+        if (id == null) {
+            return null;
+        }
+        return String.valueOf(id);
     }
 }
