@@ -43,10 +43,16 @@ public interface UserWebConverter {
     /**
      * Request转AssignUserRoleCmd
      *
+     * @param userId 用户ID（从URL路径参数获取）
      * @param request 分配用户角色请求
      * @return 分配用户角色命令
      */
-    AssignUserRoleCmd toAssignUserRoleCmd(AssignUserRoleRequest request);
+    default AssignUserRoleCmd toAssignUserRoleCmd(Long userId, AssignUserRoleRequest request) {
+        AssignUserRoleCmd cmd = new AssignUserRoleCmd();
+        cmd.setUserId(userId);
+        cmd.setRoleIds(request.getRoleIds());
+        return cmd;
+    }
 
     /**
      * Request转PageUserQuery

@@ -100,15 +100,14 @@ public class PermissionController {
     /**
      * 分配权限API
      *
-     * @param id 权限ID
-     * @param request 分配API请求
+     * @param id 权限ID（从URL路径获取）
+     * @param request 分配API请求（只包含API ID列表）
      * @return 响应结果
      */
     @PostMapping("/{id}/apis")
     public Response assignPermissionApi(
             @PathVariable Long id, @Valid @RequestBody AssignPermissionApiRequest request) {
-        request.setPermissionId(id);
         return permissionClient.assignPermissionApi(
-                permissionWebConverter.toAssignPermissionApiCmd(request));
+                permissionWebConverter.toAssignPermissionApiCmd(id, request));
     }
 }

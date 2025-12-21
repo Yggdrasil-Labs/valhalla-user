@@ -97,14 +97,13 @@ public class UserController {
     /**
      * 分配用户角色
      *
-     * @param id 用户ID
-     * @param request 分配角色请求
+     * @param id 用户ID（从URL路径获取）
+     * @param request 分配角色请求（只包含角色ID列表）
      * @return 响应结果
      */
     @PostMapping("/{id}/roles")
     public Response assignUserRole(
             @PathVariable Long id, @Valid @RequestBody AssignUserRoleRequest request) {
-        request.setUserId(id);
-        return userClient.assignUserRole(userWebConverter.toAssignUserRoleCmd(request));
+        return userClient.assignUserRole(userWebConverter.toAssignUserRoleCmd(id, request));
     }
 }

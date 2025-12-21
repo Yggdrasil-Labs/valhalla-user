@@ -97,14 +97,13 @@ public class RoleController {
     /**
      * 分配角色权限
      *
-     * @param id 角色ID
-     * @param request 分配权限请求
+     * @param id 角色ID（从URL路径获取）
+     * @param request 分配权限请求（只包含权限ID列表）
      * @return 响应结果
      */
     @PostMapping("/{id}/permissions")
     public Response assignRolePermission(
             @PathVariable Long id, @Valid @RequestBody AssignRolePermissionRequest request) {
-        request.setRoleId(id);
-        return roleClient.assignRolePermission(roleWebConverter.toAssignRolePermissionCmd(request));
+        return roleClient.assignRolePermission(roleWebConverter.toAssignRolePermissionCmd(id, request));
     }
 }

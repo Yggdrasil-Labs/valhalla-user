@@ -9,14 +9,12 @@ import lombok.Data;
 /**
  * 分配用户角色请求
  *
+ * <p>注意：用户ID从URL路径参数中获取，不需要在请求体中传递
+ *
  * @author YoungerYang-Y
  */
 @Data
 public class AssignUserRoleRequest {
-
-    /** 用户ID */
-    @NotNull(message = "用户ID不能为空")
-    private Long userId;
 
     /** 角色ID列表 */
     @NotNull(message = "角色ID列表不能为空")

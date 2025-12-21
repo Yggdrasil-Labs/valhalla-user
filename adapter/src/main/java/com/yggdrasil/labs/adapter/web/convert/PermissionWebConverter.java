@@ -43,10 +43,16 @@ public interface PermissionWebConverter {
     /**
      * Request转AssignPermissionApiCmd
      *
+     * @param permissionId 权限ID（从URL路径参数获取）
      * @param request 分配权限API请求
      * @return 分配权限API命令
      */
-    AssignPermissionApiCmd toAssignPermissionApiCmd(AssignPermissionApiRequest request);
+    default AssignPermissionApiCmd toAssignPermissionApiCmd(Long permissionId, AssignPermissionApiRequest request) {
+        AssignPermissionApiCmd cmd = new AssignPermissionApiCmd();
+        cmd.setPermissionId(permissionId);
+        cmd.setApiIds(request.getApiIds());
+        return cmd;
+    }
 
     /**
      * Request转PagePermissionQuery

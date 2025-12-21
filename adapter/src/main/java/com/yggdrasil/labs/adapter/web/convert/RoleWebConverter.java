@@ -43,10 +43,16 @@ public interface RoleWebConverter {
     /**
      * Request转AssignRolePermissionCmd
      *
+     * @param roleId 角色ID（从URL路径参数获取）
      * @param request 分配角色权限请求
      * @return 分配角色权限命令
      */
-    AssignRolePermissionCmd toAssignRolePermissionCmd(AssignRolePermissionRequest request);
+    default AssignRolePermissionCmd toAssignRolePermissionCmd(Long roleId, AssignRolePermissionRequest request) {
+        AssignRolePermissionCmd cmd = new AssignRolePermissionCmd();
+        cmd.setRoleId(roleId);
+        cmd.setPermissionIds(request.getPermissionIds());
+        return cmd;
+    }
 
     /**
      * Request转PageRoleQuery
