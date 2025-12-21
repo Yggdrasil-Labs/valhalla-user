@@ -47,7 +47,8 @@ public interface PermissionWebConverter {
      * @param request 分配权限API请求
      * @return 分配权限API命令
      */
-    default AssignPermissionApiCmd toAssignPermissionApiCmd(Long permissionId, AssignPermissionApiRequest request) {
+    default AssignPermissionApiCmd toAssignPermissionApiCmd(
+            Long permissionId, AssignPermissionApiRequest request) {
         AssignPermissionApiCmd cmd = new AssignPermissionApiCmd();
         cmd.setPermissionId(permissionId);
         cmd.setApiIds(request.getApiIds());

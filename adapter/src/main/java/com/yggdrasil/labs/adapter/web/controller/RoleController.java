@@ -104,6 +104,7 @@ public class RoleController {
     @PostMapping("/{id}/permissions")
     public Response assignRolePermission(
             @PathVariable Long id, @Valid @RequestBody AssignRolePermissionRequest request) {
-        return roleClient.assignRolePermission(roleWebConverter.toAssignRolePermissionCmd(id, request));
+        return roleClient.assignRolePermission(
+                roleWebConverter.toAssignRolePermissionCmd(id, request));
     }
 }

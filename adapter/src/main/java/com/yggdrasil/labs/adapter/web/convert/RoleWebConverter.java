@@ -47,7 +47,8 @@ public interface RoleWebConverter {
      * @param request 分配角色权限请求
      * @return 分配角色权限命令
      */
-    default AssignRolePermissionCmd toAssignRolePermissionCmd(Long roleId, AssignRolePermissionRequest request) {
+    default AssignRolePermissionCmd toAssignRolePermissionCmd(
+            Long roleId, AssignRolePermissionRequest request) {
         AssignRolePermissionCmd cmd = new AssignRolePermissionCmd();
         cmd.setRoleId(roleId);
         cmd.setPermissionIds(request.getPermissionIds());
