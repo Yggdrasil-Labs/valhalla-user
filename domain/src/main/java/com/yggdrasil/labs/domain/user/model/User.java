@@ -38,6 +38,12 @@ public class User {
     /** 状态 */
     private UserStatus status;
 
+    /** 注册来源：ADMIN-管理员创建，REGISTER-自助注册 */
+    private String source;
+
+    /** 注册类型：EMAIL/WECHAT/PHONE，自助注册场景使用 */
+    private String registerType;
+
     /** 扩展信息（JSON） */
     private String metadata;
 

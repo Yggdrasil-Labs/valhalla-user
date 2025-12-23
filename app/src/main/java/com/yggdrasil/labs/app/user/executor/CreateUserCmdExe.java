@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.cola.dto.Response;
 import com.yggdrasil.labs.client.dto.enums.ErrorCode;
+import com.yggdrasil.labs.client.dto.enums.UserSourceEnum;
 import com.yggdrasil.labs.client.dto.user.cmd.CreateUserCmd;
 import com.yggdrasil.labs.domain.user.model.User;
 import com.yggdrasil.labs.domain.user.model.UserStatus;
@@ -62,6 +63,10 @@ public class CreateUserCmdExe {
         user.setMetadata(cmd.getMetadata());
         user.setCreateTime(LocalDateTime.now());
         user.setUpdateTime(LocalDateTime.now());
+        // 管理后台创建用户，默认标记来源为管理员创建
+        user.setSource(UserSourceEnum.ADMIN.name());
+        // 管理后台创建场景下，注册类型使用空串，自助注册场景由后续 Dubbo 接口设置
+        user.setRegisterType("");
 
         // 设置状态（默认启用）
         if (cmd.getStatus() != null) {
