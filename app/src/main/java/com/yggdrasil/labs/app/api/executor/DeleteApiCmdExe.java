@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.cola.dto.Response;
 import com.yggdrasil.labs.client.dto.api.cmd.DeleteApiCmd;
+import com.yggdrasil.labs.client.dto.enums.ApiStatusEnum;
 import com.yggdrasil.labs.client.dto.enums.ErrorCode;
 import com.yggdrasil.labs.domain.api.model.Api;
 import com.yggdrasil.labs.domain.api.repository.ApiRepository;
@@ -33,6 +34,13 @@ public class DeleteApiCmdExe {
         if (api == null) {
             return Response.buildFailure(
                     ErrorCode.B_API_NOT_FOUND.getErrCode(), ErrorCode.B_API_NOT_FOUND.getErrDesc());
+        }
+
+        // 检查API状态：只有禁用状态的API才能删除
+        if (!ApiStatusEnum.DISABLED.name().equals(api.getStatus())) {
+            return Response.buildFailure(
+                    ErrorCode.B_API_STATUS_NOT_DISABLED.getErrCode(),
+                    ErrorCode.B_API_STATUS_NOT_DISABLED.getErrDesc());
         }
 
         // 删除API（软删除）

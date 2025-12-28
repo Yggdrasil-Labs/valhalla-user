@@ -48,7 +48,9 @@ public enum ErrorCode {
     /** 接口代码和版本已存在 */
     B_API_CODE_VERSION_EXISTS("API_CODE_VERSION_EXISTS", "API代码和版本已存在"),
     /** 接口已存在 */
-    B_API_EXISTS("API_EXISTS", "接口已存在");
+    B_API_EXISTS("API_EXISTS", "接口已存在"),
+    /** 接口状态不是禁用状态，无法删除 */
+    B_API_STATUS_NOT_DISABLED("API_STATUS_NOT_DISABLED", "接口状态不是禁用状态，无法删除");
 
     /** 错误码 */
     private final String errCode;
