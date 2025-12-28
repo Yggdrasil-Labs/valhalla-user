@@ -3,6 +3,7 @@ package com.yggdrasil.labs.domain.api.repository;
 import java.util.List;
 
 import com.yggdrasil.labs.domain.api.model.Api;
+import com.yggdrasil.labs.domain.common.PageResult;
 
 /**
  * API仓储接口
@@ -84,9 +85,9 @@ public interface ApiRepository {
      * @param status 接口状态（可选）
      * @param pageNum 页码（从1开始）
      * @param pageSize 每页数量
-     * @return API列表
+     * @return 分页结果（包含列表和总数）
      */
-    List<Api> findPage(
+    PageResult<Api> findPage(
             String apiCode,
             String version,
             String resourcePath,

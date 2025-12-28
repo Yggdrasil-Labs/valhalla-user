@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yggdrasil.labs.domain.common.PageResult;
 import com.yggdrasil.labs.domain.user.model.User;
 import com.yggdrasil.labs.domain.user.repository.UserRepository;
 import com.yggdrasil.labs.infrastructure.persistence.converter.UserConverter;
@@ -116,7 +117,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> findPage(String username, Integer status, Integer pageNum, Integer pageSize) {
+    public PageResult<User> findPage(
+            String username, Integer status, Integer pageNum, Integer pageSize) {
         LambdaQueryWrapper<UserDO> wrapper = new LambdaQueryWrapper<>();
         if (username != null && !username.trim().isEmpty()) {
             wrapper.like(UserDO::getUsername, username);
@@ -127,15 +129,17 @@ public class UserRepositoryImpl implements UserRepository {
         Page<UserDO> page = new Page<>(pageNum, pageSize);
         IPage<UserDO> pageResult = userService.page(page, wrapper);
         List<UserDO> userDOList = pageResult.getRecords();
-        return userDOList.stream()
-                .map(
-                        userDO -> {
-                            User user = userConverter.toEntity(userDO);
-                            List<Long> roleIds = findRoleIdsByUserId(userDO.getId());
-                            user.setRoleIds(roleIds);
-                            return user;
-                        })
-                .toList();
+        List<User> userList =
+                userDOList.stream()
+                        .map(
+                                userDO -> {
+                                    User user = userConverter.toEntity(userDO);
+                                    List<Long> roleIds = findRoleIdsByUserId(userDO.getId());
+                                    user.setRoleIds(roleIds);
+                                    return user;
+                                })
+                        .toList();
+        return new PageResult<>(userList, pageResult.getTotal());
     }
 
     @Override

@@ -4,7 +4,7 @@ import jakarta.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.yggdrasil.labs.app.user.executor.AssignUserRoleCmdExe;
@@ -63,7 +63,7 @@ public class UserClientImpl implements UserClient {
     }
 
     @Override
-    public MultiResponse<UserCO> pageUser(PageUserQuery query) {
+    public PageResponse<UserCO> pageUser(PageUserQuery query) {
         return pageUserQueryExe.execute(query);
     }
 

@@ -2,6 +2,7 @@ package com.yggdrasil.labs.domain.user.repository;
 
 import java.util.List;
 
+import com.yggdrasil.labs.domain.common.PageResult;
 import com.yggdrasil.labs.domain.user.model.User;
 
 /**
@@ -71,9 +72,9 @@ public interface UserRepository {
      * @param status 状态（可选）
      * @param pageNum 页码（从1开始）
      * @param pageSize 每页数量
-     * @return 用户列表
+     * @return 分页结果（包含列表和总数）
      */
-    List<User> findPage(String username, Integer status, Integer pageNum, Integer pageSize);
+    PageResult<User> findPage(String username, Integer status, Integer pageNum, Integer pageSize);
 
     /**
      * 统计符合条件的用户数量

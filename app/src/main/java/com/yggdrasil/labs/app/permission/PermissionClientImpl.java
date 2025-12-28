@@ -4,7 +4,7 @@ import jakarta.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.yggdrasil.labs.app.permission.executor.AssignPermissionApiCmdExe;
@@ -63,7 +63,7 @@ public class PermissionClientImpl implements PermissionClient {
     }
 
     @Override
-    public MultiResponse<PermissionCO> pagePermission(PagePermissionQuery query) {
+    public PageResponse<PermissionCO> pagePermission(PagePermissionQuery query) {
         return pagePermissionQueryExe.execute(query);
     }
 

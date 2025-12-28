@@ -2,6 +2,7 @@ package com.yggdrasil.labs.domain.role.repository;
 
 import java.util.List;
 
+import com.yggdrasil.labs.domain.common.PageResult;
 import com.yggdrasil.labs.domain.role.model.Role;
 
 /**
@@ -55,9 +56,9 @@ public interface RoleRepository {
      * @param roleCode 角色代码（可选，模糊匹配）
      * @param pageNum 页码（从1开始）
      * @param pageSize 每页数量
-     * @return 角色列表
+     * @return 分页结果（包含列表和总数）
      */
-    List<Role> findPage(String roleName, String roleCode, Integer pageNum, Integer pageSize);
+    PageResult<Role> findPage(String roleName, String roleCode, Integer pageNum, Integer pageSize);
 
     /**
      * 统计符合条件的角色数量

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.yggdrasil.labs.adapter.web.convert.UserWebConverter;
@@ -90,7 +90,7 @@ public class UserController {
      * @return 用户列表
      */
     @GetMapping
-    public MultiResponse<UserCO> pageUser(@Valid PageUserRequest request) {
+    public PageResponse<UserCO> pageUser(@Valid PageUserRequest request) {
         return userClient.pageUser(userWebConverter.toPageUserQuery(request));
     }
 

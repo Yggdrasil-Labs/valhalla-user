@@ -4,7 +4,7 @@ import jakarta.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.yggdrasil.labs.app.api.executor.CreateApiCmdExe;
@@ -59,7 +59,7 @@ public class ApiClientImpl implements ApiClient {
     }
 
     @Override
-    public MultiResponse<ApiCO> pageApi(PageApiQuery query) {
+    public PageResponse<ApiCO> pageApi(PageApiQuery query) {
         return pageApiQueryExe.execute(query);
     }
 }

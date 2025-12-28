@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yggdrasil.labs.domain.api.model.Api;
 import com.yggdrasil.labs.domain.api.repository.ApiRepository;
+import com.yggdrasil.labs.domain.common.PageResult;
 import com.yggdrasil.labs.infrastructure.persistence.converter.ApiConverter;
 import com.yggdrasil.labs.infrastructure.persistence.dataobject.ApiDO;
 import com.yggdrasil.labs.infrastructure.persistence.dataobject.service.ApiService;
@@ -97,7 +98,7 @@ public class ApiRepositoryImpl implements ApiRepository {
     }
 
     @Override
-    public List<Api> findPage(
+    public PageResult<Api> findPage(
             String apiCode,
             String version,
             String resourcePath,
@@ -124,7 +125,8 @@ public class ApiRepositoryImpl implements ApiRepository {
         Page<ApiDO> page = new Page<>(pageNum, pageSize);
         IPage<ApiDO> pageResult = apiService.page(page, wrapper);
         List<ApiDO> apiDOList = pageResult.getRecords();
-        return apiDOList.stream().map(apiConverter::toEntity).toList();
+        List<Api> apiList = apiDOList.stream().map(apiConverter::toEntity).toList();
+        return new PageResult<>(apiList, pageResult.getTotal());
     }
 
     @Override

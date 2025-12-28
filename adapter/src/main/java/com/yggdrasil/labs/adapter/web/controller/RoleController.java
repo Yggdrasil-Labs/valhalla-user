@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.yggdrasil.labs.adapter.web.convert.RoleWebConverter;
@@ -90,7 +90,7 @@ public class RoleController {
      * @return 角色列表
      */
     @GetMapping
-    public MultiResponse<RoleCO> pageRole(@Valid PageRoleRequest request) {
+    public PageResponse<RoleCO> pageRole(@Valid PageRoleRequest request) {
         return roleClient.pageRole(roleWebConverter.toPageRoleQuery(request));
     }
 

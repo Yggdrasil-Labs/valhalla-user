@@ -6,10 +6,11 @@ import jakarta.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.alibaba.cola.dto.PageResponse;
 import com.yggdrasil.labs.app.role.assembler.RoleAssembler;
 import com.yggdrasil.labs.client.dto.role.co.RoleCO;
 import com.yggdrasil.labs.client.dto.role.query.PageRoleQuery;
+import com.yggdrasil.labs.domain.common.PageResult;
 import com.yggdrasil.labs.domain.role.model.Role;
 import com.yggdrasil.labs.domain.role.repository.RoleRepository;
 
@@ -28,7 +29,7 @@ public class PageRoleQueryExe {
 
     @Resource private RoleAssembler roleAssembler;
 
-    public MultiResponse<RoleCO> execute(PageRoleQuery query) {
+    public PageResponse<RoleCO> execute(PageRoleQuery query) {
         log.info(
                 "分页查询角色: roleName={}, roleCode={}, pageNum={}, pageSize={}",
                 query.getRoleName(),
@@ -36,8 +37,8 @@ public class PageRoleQueryExe {
                 query.getPageNum(),
                 query.getPageSize());
 
-        // 查询角色列表
-        List<Role> roleList =
+        // 查询角色列表（包含总数）
+        PageResult<Role> pageResult =
                 roleRepository.findPage(
                         query.getRoleName(),
                         query.getRoleCode(),
@@ -46,7 +47,7 @@ public class PageRoleQueryExe {
 
         // 转换为CO列表
         List<RoleCO> roleCOList =
-                roleList.stream()
+                pageResult.getData().stream()
                         .map(
                                 role -> {
                                     RoleCO roleCO = roleAssembler.toCO(role);
@@ -61,6 +62,10 @@ public class PageRoleQueryExe {
                                 })
                         .toList();
 
-        return MultiResponse.of(roleCOList);
+        return PageResponse.of(
+                roleCOList,
+                (int) pageResult.getTotal(),
+                query.getPageSize(),
+                query.getPageNum() - 1);
     }
 }

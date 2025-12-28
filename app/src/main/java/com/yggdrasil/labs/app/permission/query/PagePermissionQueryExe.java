@@ -6,10 +6,11 @@ import jakarta.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.alibaba.cola.dto.PageResponse;
 import com.yggdrasil.labs.app.permission.assembler.PermissionAssembler;
 import com.yggdrasil.labs.client.dto.permission.co.PermissionCO;
 import com.yggdrasil.labs.client.dto.permission.query.PagePermissionQuery;
+import com.yggdrasil.labs.domain.common.PageResult;
 import com.yggdrasil.labs.domain.permission.model.Permission;
 import com.yggdrasil.labs.domain.permission.repository.PermissionRepository;
 
@@ -28,7 +29,7 @@ public class PagePermissionQueryExe {
 
     @Resource private PermissionAssembler permissionAssembler;
 
-    public MultiResponse<PermissionCO> execute(PagePermissionQuery query) {
+    public PageResponse<PermissionCO> execute(PagePermissionQuery query) {
         log.info(
                 "分页查询权限: module={}, permissionName={}, pageNum={}, pageSize={}",
                 query.getModule(),
@@ -36,8 +37,8 @@ public class PagePermissionQueryExe {
                 query.getPageNum(),
                 query.getPageSize());
 
-        // 查询权限列表
-        List<Permission> permissionList =
+        // 查询权限列表（包含总数）
+        PageResult<Permission> pageResult =
                 permissionRepository.findPage(
                         query.getModule(),
                         query.getPermissionName(),
@@ -46,7 +47,7 @@ public class PagePermissionQueryExe {
 
         // 转换为CO列表
         List<PermissionCO> permissionCOList =
-                permissionList.stream()
+                pageResult.getData().stream()
                         .map(
                                 permission -> {
                                     PermissionCO permissionCO =
@@ -62,6 +63,10 @@ public class PagePermissionQueryExe {
                                 })
                         .toList();
 
-        return MultiResponse.of(permissionCOList);
+        return PageResponse.of(
+                permissionCOList,
+                (int) pageResult.getTotal(),
+                query.getPageSize(),
+                query.getPageNum() - 1);
     }
 }

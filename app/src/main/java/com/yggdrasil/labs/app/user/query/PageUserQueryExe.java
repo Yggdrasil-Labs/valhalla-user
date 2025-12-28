@@ -6,10 +6,11 @@ import jakarta.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.alibaba.cola.dto.PageResponse;
 import com.yggdrasil.labs.app.user.assembler.UserAssembler;
 import com.yggdrasil.labs.client.dto.user.co.UserCO;
 import com.yggdrasil.labs.client.dto.user.query.PageUserQuery;
+import com.yggdrasil.labs.domain.common.PageResult;
 import com.yggdrasil.labs.domain.user.model.User;
 import com.yggdrasil.labs.domain.user.repository.UserRepository;
 
@@ -28,7 +29,7 @@ public class PageUserQueryExe {
 
     @Resource private UserAssembler userAssembler;
 
-    public MultiResponse<UserCO> execute(PageUserQuery query) {
+    public PageResponse<UserCO> execute(PageUserQuery query) {
         log.info(
                 "分页查询用户: username={}, status={}, pageNum={}, pageSize={}",
                 query.getUsername(),
@@ -36,8 +37,8 @@ public class PageUserQueryExe {
                 query.getPageNum(),
                 query.getPageSize());
 
-        // 查询用户列表
-        List<User> userList =
+        // 查询用户列表（包含总数）
+        PageResult<User> pageResult =
                 userRepository.findPage(
                         query.getUsername(),
                         query.getStatus(),
@@ -46,7 +47,7 @@ public class PageUserQueryExe {
 
         // 转换为CO列表
         List<UserCO> userCOList =
-                userList.stream()
+                pageResult.getData().stream()
                         .map(
                                 user -> {
                                     UserCO userCO = userAssembler.toCO(user);
@@ -61,6 +62,10 @@ public class PageUserQueryExe {
                                 })
                         .toList();
 
-        return MultiResponse.of(userCOList);
+        return PageResponse.of(
+                userCOList,
+                (int) pageResult.getTotal(),
+                query.getPageSize(),
+                query.getPageNum() - 1);
     }
 }

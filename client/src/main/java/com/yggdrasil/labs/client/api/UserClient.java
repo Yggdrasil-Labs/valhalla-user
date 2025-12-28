@@ -1,6 +1,6 @@
 package com.yggdrasil.labs.client.api;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.yggdrasil.labs.client.dto.user.cmd.AssignUserRoleCmd;
@@ -56,7 +56,7 @@ public interface UserClient {
      * @param query 查询条件
      * @return 用户列表
      */
-    MultiResponse<UserCO> pageUser(PageUserQuery query);
+    PageResponse<UserCO> pageUser(PageUserQuery query);
 
     /**
      * 分配用户角色

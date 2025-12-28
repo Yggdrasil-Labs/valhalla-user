@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yggdrasil.labs.domain.common.PageResult;
 import com.yggdrasil.labs.domain.role.model.Role;
 import com.yggdrasil.labs.domain.role.repository.RoleRepository;
 import com.yggdrasil.labs.infrastructure.persistence.converter.RoleConverter;
@@ -88,7 +89,7 @@ public class RoleRepositoryImpl implements RoleRepository {
     }
 
     @Override
-    public List<Role> findPage(
+    public PageResult<Role> findPage(
             String roleName, String roleCode, Integer pageNum, Integer pageSize) {
         LambdaQueryWrapper<RoleDO> wrapper = new LambdaQueryWrapper<>();
         if (roleName != null && !roleName.trim().isEmpty()) {
@@ -100,15 +101,18 @@ public class RoleRepositoryImpl implements RoleRepository {
         Page<RoleDO> page = new Page<>(pageNum, pageSize);
         IPage<RoleDO> pageResult = roleService.page(page, wrapper);
         List<RoleDO> roleDOList = pageResult.getRecords();
-        return roleDOList.stream()
-                .map(
-                        roleDO -> {
-                            Role role = roleConverter.toEntity(roleDO);
-                            List<Long> permissionIds = findPermissionIdsByRoleId(roleDO.getId());
-                            role.setPermissionIds(permissionIds);
-                            return role;
-                        })
-                .toList();
+        List<Role> roleList =
+                roleDOList.stream()
+                        .map(
+                                roleDO -> {
+                                    Role role = roleConverter.toEntity(roleDO);
+                                    List<Long> permissionIds =
+                                            findPermissionIdsByRoleId(roleDO.getId());
+                                    role.setPermissionIds(permissionIds);
+                                    return role;
+                                })
+                        .toList();
+        return new PageResult<>(roleList, pageResult.getTotal());
     }
 
     @Override

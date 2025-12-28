@@ -1,6 +1,6 @@
 package com.yggdrasil.labs.client.api;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.yggdrasil.labs.client.dto.api.cmd.CreateApiCmd;
@@ -55,5 +55,5 @@ public interface ApiClient {
      * @param query 查询条件
      * @return API列表
      */
-    MultiResponse<ApiCO> pageApi(PageApiQuery query);
+    PageResponse<ApiCO> pageApi(PageApiQuery query);
 }

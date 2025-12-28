@@ -4,7 +4,7 @@ import jakarta.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.yggdrasil.labs.app.role.executor.AssignRolePermissionCmdExe;
@@ -63,7 +63,7 @@ public class RoleClientImpl implements RoleClient {
     }
 
     @Override
-    public MultiResponse<RoleCO> pageRole(PageRoleQuery query) {
+    public PageResponse<RoleCO> pageRole(PageRoleQuery query) {
         return pageRoleQueryExe.execute(query);
     }
 

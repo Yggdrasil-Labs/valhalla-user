@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.yggdrasil.labs.adapter.web.convert.PermissionWebConverter;
@@ -92,7 +92,7 @@ public class PermissionController {
      * @return 权限列表
      */
     @GetMapping
-    public MultiResponse<PermissionCO> pagePermission(@Valid PagePermissionRequest request) {
+    public PageResponse<PermissionCO> pagePermission(@Valid PagePermissionRequest request) {
         return permissionClient.pagePermission(
                 permissionWebConverter.toPagePermissionQuery(request));
     }

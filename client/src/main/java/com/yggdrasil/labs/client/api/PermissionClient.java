@@ -1,6 +1,6 @@
 package com.yggdrasil.labs.client.api;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.yggdrasil.labs.client.dto.permission.cmd.AssignPermissionApiCmd;
@@ -56,7 +56,7 @@ public interface PermissionClient {
      * @param query 查询条件
      * @return 权限列表
      */
-    MultiResponse<PermissionCO> pagePermission(PagePermissionQuery query);
+    PageResponse<PermissionCO> pagePermission(PagePermissionQuery query);
 
     /**
      * 分配权限API

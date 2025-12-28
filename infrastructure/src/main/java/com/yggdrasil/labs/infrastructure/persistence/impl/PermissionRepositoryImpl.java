@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yggdrasil.labs.domain.common.PageResult;
 import com.yggdrasil.labs.domain.permission.model.Permission;
 import com.yggdrasil.labs.domain.permission.repository.PermissionRepository;
 import com.yggdrasil.labs.infrastructure.persistence.converter.PermissionConverter;
@@ -104,7 +105,7 @@ public class PermissionRepositoryImpl implements PermissionRepository {
     }
 
     @Override
-    public List<Permission> findPage(
+    public PageResult<Permission> findPage(
             String module, String permissionName, Integer pageNum, Integer pageSize) {
         LambdaQueryWrapper<PermissionDO> wrapper = new LambdaQueryWrapper<>();
         if (module != null && !module.trim().isEmpty()) {
@@ -116,15 +117,19 @@ public class PermissionRepositoryImpl implements PermissionRepository {
         Page<PermissionDO> page = new Page<>(pageNum, pageSize);
         IPage<PermissionDO> pageResult = permissionService.page(page, wrapper);
         List<PermissionDO> permissionDOList = pageResult.getRecords();
-        return permissionDOList.stream()
-                .map(
-                        permissionDO -> {
-                            Permission permission = permissionConverter.toEntity(permissionDO);
-                            List<Long> apiIds = findApiIdsByPermissionId(permissionDO.getId());
-                            permission.setApiIds(apiIds);
-                            return permission;
-                        })
-                .toList();
+        List<Permission> permissionList =
+                permissionDOList.stream()
+                        .map(
+                                permissionDO -> {
+                                    Permission permission =
+                                            permissionConverter.toEntity(permissionDO);
+                                    List<Long> apiIds =
+                                            findApiIdsByPermissionId(permissionDO.getId());
+                                    permission.setApiIds(apiIds);
+                                    return permission;
+                                })
+                        .toList();
+        return new PageResult<>(permissionList, pageResult.getTotal());
     }
 
     @Override

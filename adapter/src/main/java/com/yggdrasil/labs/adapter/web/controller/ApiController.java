@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.yggdrasil.labs.adapter.web.convert.ApiWebConverter;
@@ -88,7 +88,7 @@ public class ApiController {
      * @return API列表
      */
     @GetMapping
-    public MultiResponse<ApiCO> pageApi(@Valid PageApiRequest request) {
+    public PageResponse<ApiCO> pageApi(@Valid PageApiRequest request) {
         return apiClient.pageApi(apiWebConverter.toPageApiQuery(request));
     }
 }

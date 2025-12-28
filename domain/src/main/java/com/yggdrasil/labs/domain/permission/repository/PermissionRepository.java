@@ -2,6 +2,7 @@ package com.yggdrasil.labs.domain.permission.repository;
 
 import java.util.List;
 
+import com.yggdrasil.labs.domain.common.PageResult;
 import com.yggdrasil.labs.domain.permission.model.Permission;
 
 /**
@@ -65,9 +66,9 @@ public interface PermissionRepository {
      * @param permissionName 权限名称（可选，模糊匹配）
      * @param pageNum 页码（从1开始）
      * @param pageSize 每页数量
-     * @return 权限列表
+     * @return 分页结果（包含列表和总数）
      */
-    List<Permission> findPage(
+    PageResult<Permission> findPage(
             String module, String permissionName, Integer pageNum, Integer pageSize);
 
     /**

@@ -1,6 +1,6 @@
 package com.yggdrasil.labs.client.api;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.yggdrasil.labs.client.dto.role.cmd.AssignRolePermissionCmd;
@@ -56,7 +56,7 @@ public interface RoleClient {
      * @param query 查询条件
      * @return 角色列表
      */
-    MultiResponse<RoleCO> pageRole(PageRoleQuery query);
+    PageResponse<RoleCO> pageRole(PageRoleQuery query);
 
     /**
      * 分配角色权限
