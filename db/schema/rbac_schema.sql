@@ -64,19 +64,25 @@ CREATE TABLE IF NOT EXISTS `permission` (
 -- 接口表（系统接口定义，模块、资源、操作通过权限接口关联表获取）
 CREATE TABLE IF NOT EXISTS `api` (
     `id` BIGINT NOT NULL COMMENT '接口ID（雪花ID）',
-    `api_code` VARCHAR(128) NOT NULL COMMENT '接口代码',
+    `api_code` VARCHAR(128) NOT NULL COMMENT '接口能力代码（稳定，不含版本）',
+    `version` VARCHAR(32) NOT NULL COMMENT '接口版本（v1 / v2 / v3）',
     `api_name` VARCHAR(100) NOT NULL COMMENT '接口名称',
     `resource_path` VARCHAR(255) NOT NULL COMMENT '资源路径（API路径，用于接口匹配）',
-    `resource_method` VARCHAR(10) NOT NULL COMMENT 'HTTP方法（GET、POST、PUT、DELETE等，用于接口匹配）',
+    `resource_method` VARCHAR(10) NOT NULL COMMENT 'HTTP方法（GET/POST/PUT/DELETE等）',
+    `status` VARCHAR(32) NOT NULL DEFAULT 'ENABLED' COMMENT '接口状态（ENABLED / DEPRECATED / DISABLED）',
     `description` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '接口描述',
     `metadata` JSON NULL COMMENT '扩展信息（JSON）',
     `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `deleted_at` BIGINT NOT NULL DEFAULT 0 COMMENT '软删除时间戳（0-未删除）',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `uk_path_method` (`resource_path`, `resource_method`),
-    KEY `idx_api_code_deleted` (`api_code`, `deleted_at`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='接口表';
+    -- 同一能力下，不允许重复版本（考虑软删除）
+    UNIQUE KEY `uk_api_code_version` (`api_code`, `version`, `deleted_at`),
+    -- 防止接口实现重复注册
+    UNIQUE KEY `uk_path_method_deleted` (`resource_path`, `resource_method`, `deleted_at`),
+    -- 查询能力接口族
+    KEY `idx_api_code` (`api_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='接口表（API实现）';
 
 -- 权限接口关联表（权限与接口的一对多关系）
 CREATE TABLE IF NOT EXISTS `permission_api` (
