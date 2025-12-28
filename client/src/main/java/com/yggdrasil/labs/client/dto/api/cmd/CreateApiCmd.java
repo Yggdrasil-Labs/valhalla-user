@@ -32,6 +32,12 @@ public class CreateApiCmd extends Command {
     @NotBlank(message = "HTTP方法不能为空")
     private String resourceMethod;
 
+    /** 接口版本（可选，如未指定则默认为 "v1"） */
+    private String version;
+
+    /** 接口状态（可选，如未指定则默认为 "ENABLED"） */
+    private String status;
+
     /** 接口描述 */
     private String description;
 

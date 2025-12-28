@@ -41,6 +41,9 @@ public class UpdateApiCmdExe {
         if (cmd.getApiName() != null) {
             api.setApiName(cmd.getApiName());
         }
+        if (cmd.getStatus() != null) {
+            api.setStatus(cmd.getStatus());
+        }
         if (cmd.getDescription() != null) {
             api.setDescription(cmd.getDescription());
         }

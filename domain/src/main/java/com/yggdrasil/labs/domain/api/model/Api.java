@@ -21,6 +21,9 @@ public class Api {
     /** 接口代码 */
     private String apiCode;
 
+    /** 接口版本（v1 / v2 / v3） */
+    private String version;
+
     /** 接口名称 */
     private String apiName;
 
@@ -29,6 +32,9 @@ public class Api {
 
     /** HTTP方法（GET、POST、PUT、DELETE等） */
     private String resourceMethod;
+
+    /** 接口状态（ENABLED / DEPRECATED / DISABLED） */
+    private String status;
 
     /** 接口描述 */
     private String description;

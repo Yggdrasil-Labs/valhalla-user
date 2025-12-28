@@ -45,6 +45,8 @@ public enum ErrorCode {
     B_API_NOT_FOUND("API_NOT_FOUND", "接口不存在"),
     /** 接口代码已存在 */
     B_API_CODE_EXISTS("API_CODE_EXISTS", "接口代码已存在"),
+    /** 接口代码和版本已存在 */
+    B_API_CODE_VERSION_EXISTS("API_CODE_VERSION_EXISTS", "API代码和版本已存在"),
     /** 接口已存在 */
     B_API_EXISTS("API_EXISTS", "接口已存在");
 

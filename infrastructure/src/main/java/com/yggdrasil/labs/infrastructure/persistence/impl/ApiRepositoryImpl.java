@@ -48,6 +48,25 @@ public class ApiRepositoryImpl implements ApiRepository {
     }
 
     @Override
+    public Api findByApiCodeAndVersion(String apiCode, String version) {
+        LambdaQueryWrapper<ApiDO> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(ApiDO::getApiCode, apiCode).eq(ApiDO::getVersion, version);
+        ApiDO apiDO = apiService.getOne(wrapper);
+        if (apiDO == null) {
+            return null;
+        }
+        return apiConverter.toEntity(apiDO);
+    }
+
+    @Override
+    public List<Api> findByApiCodeList(String apiCode) {
+        LambdaQueryWrapper<ApiDO> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(ApiDO::getApiCode, apiCode);
+        List<ApiDO> apiDOList = apiService.list(wrapper);
+        return apiDOList.stream().map(apiConverter::toEntity).toList();
+    }
+
+    @Override
     public Api findByResourcePathAndMethod(String resourcePath, String resourceMethod) {
         LambdaQueryWrapper<ApiDO> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(ApiDO::getResourcePath, resourcePath)
@@ -80,19 +99,27 @@ public class ApiRepositoryImpl implements ApiRepository {
     @Override
     public List<Api> findPage(
             String apiCode,
+            String version,
             String resourcePath,
             String resourceMethod,
+            String status,
             Integer pageNum,
             Integer pageSize) {
         LambdaQueryWrapper<ApiDO> wrapper = new LambdaQueryWrapper<>();
         if (apiCode != null && !apiCode.trim().isEmpty()) {
             wrapper.like(ApiDO::getApiCode, apiCode);
         }
+        if (version != null && !version.trim().isEmpty()) {
+            wrapper.eq(ApiDO::getVersion, version);
+        }
         if (resourcePath != null && !resourcePath.trim().isEmpty()) {
             wrapper.like(ApiDO::getResourcePath, resourcePath);
         }
         if (resourceMethod != null && !resourceMethod.trim().isEmpty()) {
             wrapper.eq(ApiDO::getResourceMethod, resourceMethod);
+        }
+        if (status != null && !status.trim().isEmpty()) {
+            wrapper.eq(ApiDO::getStatus, status);
         }
         Page<ApiDO> page = new Page<>(pageNum, pageSize);
         IPage<ApiDO> pageResult = apiService.page(page, wrapper);
@@ -101,16 +128,27 @@ public class ApiRepositoryImpl implements ApiRepository {
     }
 
     @Override
-    public long count(String apiCode, String resourcePath, String resourceMethod) {
+    public long count(
+            String apiCode,
+            String version,
+            String resourcePath,
+            String resourceMethod,
+            String status) {
         LambdaQueryWrapper<ApiDO> wrapper = new LambdaQueryWrapper<>();
         if (apiCode != null && !apiCode.trim().isEmpty()) {
             wrapper.like(ApiDO::getApiCode, apiCode);
+        }
+        if (version != null && !version.trim().isEmpty()) {
+            wrapper.eq(ApiDO::getVersion, version);
         }
         if (resourcePath != null && !resourcePath.trim().isEmpty()) {
             wrapper.like(ApiDO::getResourcePath, resourcePath);
         }
         if (resourceMethod != null && !resourceMethod.trim().isEmpty()) {
             wrapper.eq(ApiDO::getResourceMethod, resourceMethod);
+        }
+        if (status != null && !status.trim().isEmpty()) {
+            wrapper.eq(ApiDO::getStatus, status);
         }
         return apiService.count(wrapper);
     }
@@ -127,6 +165,13 @@ public class ApiRepositoryImpl implements ApiRepository {
         LambdaQueryWrapper<ApiDO> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(ApiDO::getResourcePath, resourcePath)
                 .eq(ApiDO::getResourceMethod, resourceMethod);
+        return apiService.count(wrapper) > 0;
+    }
+
+    @Override
+    public boolean existsByApiCodeAndVersion(String apiCode, String version) {
+        LambdaQueryWrapper<ApiDO> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(ApiDO::getApiCode, apiCode).eq(ApiDO::getVersion, version);
         return apiService.count(wrapper) > 0;
     }
 }

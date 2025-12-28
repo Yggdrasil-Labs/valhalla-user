@@ -22,6 +22,9 @@ public class ApiCO extends DTO {
     /** 接口代码 */
     private String apiCode;
 
+    /** 接口版本 */
+    private String version;
+
     /** 接口名称 */
     private String apiName;
 
@@ -30,6 +33,9 @@ public class ApiCO extends DTO {
 
     /** HTTP方法（GET、POST、PUT、DELETE等） */
     private String resourceMethod;
+
+    /** 接口状态 */
+    private String status;
 
     /** 接口描述 */
     private String description;

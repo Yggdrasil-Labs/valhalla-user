@@ -30,10 +30,13 @@ public class PageApiQueryExe {
 
     public MultiResponse<ApiCO> execute(PageApiQuery query) {
         log.info(
-                "分页查询API: apiCode={}, resourcePath={}, resourceMethod={}, pageNum={}, pageSize={}",
+                "分页查询API: apiCode={}, version={}, resourcePath={}, resourceMethod={}, status={},"
+                        + " pageNum={}, pageSize={}",
                 query.getApiCode(),
+                query.getVersion(),
                 query.getResourcePath(),
                 query.getResourceMethod(),
+                query.getStatus(),
                 query.getPageNum(),
                 query.getPageSize());
 
@@ -41,8 +44,10 @@ public class PageApiQueryExe {
         List<Api> apiList =
                 apiRepository.findPage(
                         query.getApiCode(),
+                        query.getVersion(),
                         query.getResourcePath(),
                         query.getResourceMethod(),
+                        query.getStatus(),
                         query.getPageNum(),
                         query.getPageSize());
 

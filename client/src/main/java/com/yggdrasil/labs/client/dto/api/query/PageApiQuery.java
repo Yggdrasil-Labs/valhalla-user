@@ -23,6 +23,12 @@ public class PageApiQuery extends Query {
     /** HTTP方法 */
     private String resourceMethod;
 
+    /** 接口版本（可选） */
+    private String version;
+
+    /** 接口状态（可选） */
+    private String status;
+
     /** 页码（从1开始） */
     private Integer pageNum = 1;
 

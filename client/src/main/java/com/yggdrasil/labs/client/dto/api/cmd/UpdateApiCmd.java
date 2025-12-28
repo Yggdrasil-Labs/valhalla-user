@@ -25,6 +25,9 @@ public class UpdateApiCmd extends Command {
     @NotBlank(message = "接口名称不能为空")
     private String apiName;
 
+    /** 接口状态（可选，支持状态变更） */
+    private String status;
+
     /** 接口描述 */
     private String description;
 
