@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.cola.dto.PageResponse;
 import com.yggdrasil.labs.app.api.assembler.ApiAssembler;
-import com.yggdrasil.labs.client.dto.api.co.ApiCO;
-import com.yggdrasil.labs.client.dto.api.query.PageApiQuery;
+import com.yggdrasil.labs.app.api.dto.co.ApiCO;
+import com.yggdrasil.labs.app.api.dto.query.PageApiQuery;
 import com.yggdrasil.labs.domain.api.model.Api;
 import com.yggdrasil.labs.domain.api.repository.ApiRepository;
 import com.yggdrasil.labs.domain.common.PageResult;

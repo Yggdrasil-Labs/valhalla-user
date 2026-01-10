@@ -1,4 +1,4 @@
-package com.yggdrasil.labs.app.user;
+package com.yggdrasil.labs.app.service.impl;
 
 import jakarta.annotation.Resource;
 
@@ -7,28 +7,24 @@ import org.springframework.stereotype.Service;
 import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
+import com.yggdrasil.labs.app.service.UserApplicationService;
+import com.yggdrasil.labs.app.user.dto.cmd.AssignUserRoleCmd;
+import com.yggdrasil.labs.app.user.dto.cmd.CreateUserCmd;
+import com.yggdrasil.labs.app.user.dto.cmd.DeleteUserCmd;
+import com.yggdrasil.labs.app.user.dto.cmd.UpdateUserCmd;
+import com.yggdrasil.labs.app.user.dto.co.UserCO;
+import com.yggdrasil.labs.app.user.dto.query.GetUserQuery;
+import com.yggdrasil.labs.app.user.dto.query.PageUserQuery;
 import com.yggdrasil.labs.app.user.executor.AssignUserRoleCmdExe;
 import com.yggdrasil.labs.app.user.executor.CreateUserCmdExe;
 import com.yggdrasil.labs.app.user.executor.DeleteUserCmdExe;
 import com.yggdrasil.labs.app.user.executor.UpdateUserCmdExe;
 import com.yggdrasil.labs.app.user.query.GetUserQueryExe;
 import com.yggdrasil.labs.app.user.query.PageUserQueryExe;
-import com.yggdrasil.labs.client.api.UserClient;
-import com.yggdrasil.labs.client.dto.user.cmd.AssignUserRoleCmd;
-import com.yggdrasil.labs.client.dto.user.cmd.CreateUserCmd;
-import com.yggdrasil.labs.client.dto.user.cmd.DeleteUserCmd;
-import com.yggdrasil.labs.client.dto.user.cmd.UpdateUserCmd;
-import com.yggdrasil.labs.client.dto.user.co.UserCO;
-import com.yggdrasil.labs.client.dto.user.query.GetUserQuery;
-import com.yggdrasil.labs.client.dto.user.query.PageUserQuery;
 
-/**
- * 用户客户端实现
- *
- * @author YoungerYang-Y
- */
+/** 用户应用服务实现 */
 @Service
-public class UserClientImpl implements UserClient {
+public class UserApplicationServiceImpl implements UserApplicationService {
 
     @Resource private CreateUserCmdExe createUserCmdExe;
 

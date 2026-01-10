@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.cola.dto.PageResponse;
 import com.yggdrasil.labs.app.permission.assembler.PermissionAssembler;
-import com.yggdrasil.labs.client.dto.permission.co.PermissionCO;
-import com.yggdrasil.labs.client.dto.permission.query.PagePermissionQuery;
+import com.yggdrasil.labs.app.permission.dto.co.PermissionCO;
+import com.yggdrasil.labs.app.permission.dto.query.PagePermissionQuery;
 import com.yggdrasil.labs.domain.common.PageResult;
 import com.yggdrasil.labs.domain.permission.model.Permission;
 import com.yggdrasil.labs.domain.permission.repository.PermissionRepository;

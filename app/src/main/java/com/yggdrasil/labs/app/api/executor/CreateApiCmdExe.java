@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.cola.dto.Response;
-import com.yggdrasil.labs.client.dto.api.cmd.CreateApiCmd;
-import com.yggdrasil.labs.client.dto.enums.ApiStatusEnum;
-import com.yggdrasil.labs.client.dto.enums.ErrorCode;
+import com.yggdrasil.labs.app.api.dto.cmd.CreateApiCmd;
+import com.yggdrasil.labs.app.common.dto.enums.ApiStatusEnum;
+import com.yggdrasil.labs.app.common.dto.enums.ErrorCode;
 import com.yggdrasil.labs.domain.api.model.Api;
 import com.yggdrasil.labs.domain.api.repository.ApiRepository;
 

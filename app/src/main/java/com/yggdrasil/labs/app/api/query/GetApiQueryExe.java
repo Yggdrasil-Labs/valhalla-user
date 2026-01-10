@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.cola.dto.SingleResponse;
 import com.yggdrasil.labs.app.api.assembler.ApiAssembler;
-import com.yggdrasil.labs.client.dto.api.co.ApiCO;
-import com.yggdrasil.labs.client.dto.api.query.GetApiQuery;
-import com.yggdrasil.labs.client.dto.enums.ErrorCode;
+import com.yggdrasil.labs.app.api.dto.co.ApiCO;
+import com.yggdrasil.labs.app.api.dto.query.GetApiQuery;
+import com.yggdrasil.labs.app.common.dto.enums.ErrorCode;
 import com.yggdrasil.labs.domain.api.model.Api;
 import com.yggdrasil.labs.domain.api.repository.ApiRepository;
 

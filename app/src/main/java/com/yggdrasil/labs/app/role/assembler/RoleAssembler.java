@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
-import com.yggdrasil.labs.client.dto.role.co.RoleCO;
+import com.yggdrasil.labs.app.role.dto.co.RoleCO;
 import com.yggdrasil.labs.domain.role.model.Role;
 
 /**

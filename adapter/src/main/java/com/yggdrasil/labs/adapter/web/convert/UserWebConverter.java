@@ -7,12 +7,12 @@ import com.yggdrasil.labs.adapter.web.request.AssignUserRoleRequest;
 import com.yggdrasil.labs.adapter.web.request.CreateUserRequest;
 import com.yggdrasil.labs.adapter.web.request.PageUserRequest;
 import com.yggdrasil.labs.adapter.web.request.UpdateUserRequest;
-import com.yggdrasil.labs.client.dto.user.cmd.AssignUserRoleCmd;
-import com.yggdrasil.labs.client.dto.user.cmd.CreateUserCmd;
-import com.yggdrasil.labs.client.dto.user.cmd.DeleteUserCmd;
-import com.yggdrasil.labs.client.dto.user.cmd.UpdateUserCmd;
-import com.yggdrasil.labs.client.dto.user.query.GetUserQuery;
-import com.yggdrasil.labs.client.dto.user.query.PageUserQuery;
+import com.yggdrasil.labs.app.user.dto.cmd.AssignUserRoleCmd;
+import com.yggdrasil.labs.app.user.dto.cmd.CreateUserCmd;
+import com.yggdrasil.labs.app.user.dto.cmd.DeleteUserCmd;
+import com.yggdrasil.labs.app.user.dto.cmd.UpdateUserCmd;
+import com.yggdrasil.labs.app.user.dto.query.GetUserQuery;
+import com.yggdrasil.labs.app.user.dto.query.PageUserQuery;
 
 /**
  * 用户Web转换器

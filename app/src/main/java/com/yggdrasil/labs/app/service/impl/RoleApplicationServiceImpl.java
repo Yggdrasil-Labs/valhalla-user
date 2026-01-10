@@ -1,4 +1,4 @@
-package com.yggdrasil.labs.app.role;
+package com.yggdrasil.labs.app.service.impl;
 
 import jakarta.annotation.Resource;
 
@@ -7,28 +7,24 @@ import org.springframework.stereotype.Service;
 import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
+import com.yggdrasil.labs.app.role.dto.cmd.AssignRolePermissionCmd;
+import com.yggdrasil.labs.app.role.dto.cmd.CreateRoleCmd;
+import com.yggdrasil.labs.app.role.dto.cmd.DeleteRoleCmd;
+import com.yggdrasil.labs.app.role.dto.cmd.UpdateRoleCmd;
+import com.yggdrasil.labs.app.role.dto.co.RoleCO;
+import com.yggdrasil.labs.app.role.dto.query.GetRoleQuery;
+import com.yggdrasil.labs.app.role.dto.query.PageRoleQuery;
 import com.yggdrasil.labs.app.role.executor.AssignRolePermissionCmdExe;
 import com.yggdrasil.labs.app.role.executor.CreateRoleCmdExe;
 import com.yggdrasil.labs.app.role.executor.DeleteRoleCmdExe;
 import com.yggdrasil.labs.app.role.executor.UpdateRoleCmdExe;
 import com.yggdrasil.labs.app.role.query.GetRoleQueryExe;
 import com.yggdrasil.labs.app.role.query.PageRoleQueryExe;
-import com.yggdrasil.labs.client.api.RoleClient;
-import com.yggdrasil.labs.client.dto.role.cmd.AssignRolePermissionCmd;
-import com.yggdrasil.labs.client.dto.role.cmd.CreateRoleCmd;
-import com.yggdrasil.labs.client.dto.role.cmd.DeleteRoleCmd;
-import com.yggdrasil.labs.client.dto.role.cmd.UpdateRoleCmd;
-import com.yggdrasil.labs.client.dto.role.co.RoleCO;
-import com.yggdrasil.labs.client.dto.role.query.GetRoleQuery;
-import com.yggdrasil.labs.client.dto.role.query.PageRoleQuery;
+import com.yggdrasil.labs.app.service.RoleApplicationService;
 
-/**
- * 角色客户端实现
- *
- * @author YoungerYang-Y
- */
+/** 角色应用服务实现 */
 @Service
-public class RoleClientImpl implements RoleClient {
+public class RoleApplicationServiceImpl implements RoleApplicationService {
 
     @Resource private CreateRoleCmdExe createRoleCmdExe;
 

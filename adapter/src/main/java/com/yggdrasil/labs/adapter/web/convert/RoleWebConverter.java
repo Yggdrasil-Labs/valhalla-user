@@ -7,12 +7,12 @@ import com.yggdrasil.labs.adapter.web.request.AssignRolePermissionRequest;
 import com.yggdrasil.labs.adapter.web.request.CreateRoleRequest;
 import com.yggdrasil.labs.adapter.web.request.PageRoleRequest;
 import com.yggdrasil.labs.adapter.web.request.UpdateRoleRequest;
-import com.yggdrasil.labs.client.dto.role.cmd.AssignRolePermissionCmd;
-import com.yggdrasil.labs.client.dto.role.cmd.CreateRoleCmd;
-import com.yggdrasil.labs.client.dto.role.cmd.DeleteRoleCmd;
-import com.yggdrasil.labs.client.dto.role.cmd.UpdateRoleCmd;
-import com.yggdrasil.labs.client.dto.role.query.GetRoleQuery;
-import com.yggdrasil.labs.client.dto.role.query.PageRoleQuery;
+import com.yggdrasil.labs.app.role.dto.cmd.AssignRolePermissionCmd;
+import com.yggdrasil.labs.app.role.dto.cmd.CreateRoleCmd;
+import com.yggdrasil.labs.app.role.dto.cmd.DeleteRoleCmd;
+import com.yggdrasil.labs.app.role.dto.cmd.UpdateRoleCmd;
+import com.yggdrasil.labs.app.role.dto.query.GetRoleQuery;
+import com.yggdrasil.labs.app.role.dto.query.PageRoleQuery;
 
 /**
  * 角色Web转换器

@@ -6,23 +6,16 @@
  * <p><b>核心职责：</b>
  *
  * <ul>
- *   <li>定义对外提供的业务接口（Client API）
- *   <li>定义数据传输对象（DTO）：Command、Query、CO
- *   <li>定义枚举类型和错误码
- *   <li>作为系统的对外契约，供 Adapter 层调用
+ *   <li>定义对外提供的业务接口（Client API），供 Dubbo/Feign 等外部协议实现
+ *   <li>可选：定义外部协议相关的 DTO，不包含内部应用 DTO
+ *   <li>作为系统的对外契约，保持独立，内部 App/Adapter 不再依赖 Client DTO
  * </ul>
  *
  * <p><b>包结构：</b>
  *
  * <ul>
- *   <li><b>api</b>：业务接口定义（Client API），按聚合根组织
- *   <li><b>dto</b>：数据传输对象
- *       <ul>
- *         <li><b>cmd</b>：命令对象（Command），写操作的输入
- *         <li><b>query</b>：查询对象（Query），读操作的输入
- *         <li><b>co</b>：客户对象（Client Object），读操作的输出
- *         <li><b>enums</b>：枚举类型和错误码
- *       </ul>
+ *   <li><b>api</b>：业务接口定义（Client API），按聚合根组织，供 RPC/Feign Provider/Client 实现
+ *   <li><b>dto</b>：外部协议 DTO（若有），不含内部应用 DTO；内部 Command/Query/CO/枚举已迁移至 App 层
  * </ul>
  *
  * <p><b>设计原则：</b>
@@ -47,9 +40,9 @@
  * <p><b>依赖关系：</b>
  *
  * <ul>
- *   <li><b>被依赖</b>：Adapter 层和 App 层依赖 Client 层
- *   <li><b>依赖</b>：只依赖 COLA 框架的基础类（Command、Query、DTO、Response）
- *   <li><b>不依赖</b>：不依赖其他任何层（Start、Adapter、App、Domain、Infrastructure）
+ *   <li><b>被依赖</b>：外部协议适配器（Dubbo/Feign Provider/Client）依赖 Client 契约
+ *   <li><b>依赖</b>：仅依赖 COLA 基础类和必要校验注解
+ *   <li><b>不依赖</b>：不依赖 App、Domain、Infrastructure；Adapter 默认依赖 App，不再依赖 Client DTO
  * </ul>
  *
  * <p><b>注意事项：</b>

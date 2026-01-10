@@ -1,7 +1,10 @@
 /**
- * App 应用层根包
+ * 应用层（Application Layer）
  *
- * <p>应用层（Application Layer）负责协调领域对象完成业务用例，是领域层的直接用户。 应用层按领域（Domain）组织，每个领域包含
- * Facade、Executor、Query、Assembler、Scheduler 等子包。
+ * <p>职责：编排领域服务，暴露 ApplicationService 接口，供适配层直接调用。
+ *
+ * <p>结构：按聚合划分目录，包含 ApplicationService、Executor（Cmd/Query）、Assembler、DTO 等。
+ *
+ * <p>依赖：依赖 Domain；不依赖 Client（Client 仅作为外部契约层）。
  */
 package com.yggdrasil.labs.app;

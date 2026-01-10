@@ -20,8 +20,8 @@ import com.yggdrasil.labs.adapter.web.request.AssignUserRoleRequest;
 import com.yggdrasil.labs.adapter.web.request.CreateUserRequest;
 import com.yggdrasil.labs.adapter.web.request.PageUserRequest;
 import com.yggdrasil.labs.adapter.web.request.UpdateUserRequest;
-import com.yggdrasil.labs.client.api.UserClient;
-import com.yggdrasil.labs.client.dto.user.co.UserCO;
+import com.yggdrasil.labs.app.service.UserApplicationService;
+import com.yggdrasil.labs.app.user.dto.co.UserCO;
 
 /**
  * 用户控制器
@@ -32,7 +32,7 @@ import com.yggdrasil.labs.client.dto.user.co.UserCO;
 @RequestMapping("/api/v1/users")
 public class UserController {
 
-    @Resource private UserClient userClient;
+    @Resource private UserApplicationService userApplicationService;
 
     @Resource private UserWebConverter userWebConverter;
 
@@ -44,7 +44,7 @@ public class UserController {
      */
     @PostMapping
     public Response createUser(@Valid @RequestBody CreateUserRequest request) {
-        return userClient.createUser(userWebConverter.toCreateUserCmd(request));
+        return userApplicationService.createUser(userWebConverter.toCreateUserCmd(request));
     }
 
     /**
@@ -58,7 +58,7 @@ public class UserController {
     public Response updateUser(
             @PathVariable Long id, @Valid @RequestBody UpdateUserRequest request) {
         request.setId(id);
-        return userClient.updateUser(userWebConverter.toUpdateUserCmd(request));
+        return userApplicationService.updateUser(userWebConverter.toUpdateUserCmd(request));
     }
 
     /**
@@ -69,7 +69,7 @@ public class UserController {
      */
     @DeleteMapping("/{id}")
     public Response deleteUser(@PathVariable Long id) {
-        return userClient.deleteUser(userWebConverter.toDeleteUserCmd(id));
+        return userApplicationService.deleteUser(userWebConverter.toDeleteUserCmd(id));
     }
 
     /**
@@ -80,7 +80,7 @@ public class UserController {
      */
     @GetMapping("/{id}")
     public SingleResponse<UserCO> getUser(@PathVariable Long id) {
-        return userClient.getUser(userWebConverter.toGetUserQuery(id));
+        return userApplicationService.getUser(userWebConverter.toGetUserQuery(id));
     }
 
     /**
@@ -91,7 +91,7 @@ public class UserController {
      */
     @GetMapping
     public PageResponse<UserCO> pageUser(@Valid PageUserRequest request) {
-        return userClient.pageUser(userWebConverter.toPageUserQuery(request));
+        return userApplicationService.pageUser(userWebConverter.toPageUserQuery(request));
     }
 
     /**
@@ -104,6 +104,7 @@ public class UserController {
     @PostMapping("/{id}/roles")
     public Response assignUserRole(
             @PathVariable Long id, @Valid @RequestBody AssignUserRoleRequest request) {
-        return userClient.assignUserRole(userWebConverter.toAssignUserRoleCmd(id, request));
+        return userApplicationService.assignUserRole(
+                userWebConverter.toAssignUserRoleCmd(id, request));
     }
 }

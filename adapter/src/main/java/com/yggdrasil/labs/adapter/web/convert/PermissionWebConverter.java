@@ -7,12 +7,12 @@ import com.yggdrasil.labs.adapter.web.request.AssignPermissionApiRequest;
 import com.yggdrasil.labs.adapter.web.request.CreatePermissionRequest;
 import com.yggdrasil.labs.adapter.web.request.PagePermissionRequest;
 import com.yggdrasil.labs.adapter.web.request.UpdatePermissionRequest;
-import com.yggdrasil.labs.client.dto.permission.cmd.AssignPermissionApiCmd;
-import com.yggdrasil.labs.client.dto.permission.cmd.CreatePermissionCmd;
-import com.yggdrasil.labs.client.dto.permission.cmd.DeletePermissionCmd;
-import com.yggdrasil.labs.client.dto.permission.cmd.UpdatePermissionCmd;
-import com.yggdrasil.labs.client.dto.permission.query.GetPermissionQuery;
-import com.yggdrasil.labs.client.dto.permission.query.PagePermissionQuery;
+import com.yggdrasil.labs.app.permission.dto.cmd.AssignPermissionApiCmd;
+import com.yggdrasil.labs.app.permission.dto.cmd.CreatePermissionCmd;
+import com.yggdrasil.labs.app.permission.dto.cmd.DeletePermissionCmd;
+import com.yggdrasil.labs.app.permission.dto.cmd.UpdatePermissionCmd;
+import com.yggdrasil.labs.app.permission.dto.query.GetPermissionQuery;
+import com.yggdrasil.labs.app.permission.dto.query.PagePermissionQuery;
 
 /**
  * 权限Web转换器

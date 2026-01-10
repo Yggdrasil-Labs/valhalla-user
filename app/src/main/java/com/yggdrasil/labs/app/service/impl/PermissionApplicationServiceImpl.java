@@ -1,4 +1,4 @@
-package com.yggdrasil.labs.app.permission;
+package com.yggdrasil.labs.app.service.impl;
 
 import jakarta.annotation.Resource;
 
@@ -7,28 +7,24 @@ import org.springframework.stereotype.Service;
 import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
+import com.yggdrasil.labs.app.permission.dto.cmd.AssignPermissionApiCmd;
+import com.yggdrasil.labs.app.permission.dto.cmd.CreatePermissionCmd;
+import com.yggdrasil.labs.app.permission.dto.cmd.DeletePermissionCmd;
+import com.yggdrasil.labs.app.permission.dto.cmd.UpdatePermissionCmd;
+import com.yggdrasil.labs.app.permission.dto.co.PermissionCO;
+import com.yggdrasil.labs.app.permission.dto.query.GetPermissionQuery;
+import com.yggdrasil.labs.app.permission.dto.query.PagePermissionQuery;
 import com.yggdrasil.labs.app.permission.executor.AssignPermissionApiCmdExe;
 import com.yggdrasil.labs.app.permission.executor.CreatePermissionCmdExe;
 import com.yggdrasil.labs.app.permission.executor.DeletePermissionCmdExe;
 import com.yggdrasil.labs.app.permission.executor.UpdatePermissionCmdExe;
 import com.yggdrasil.labs.app.permission.query.GetPermissionQueryExe;
 import com.yggdrasil.labs.app.permission.query.PagePermissionQueryExe;
-import com.yggdrasil.labs.client.api.PermissionClient;
-import com.yggdrasil.labs.client.dto.permission.cmd.AssignPermissionApiCmd;
-import com.yggdrasil.labs.client.dto.permission.cmd.CreatePermissionCmd;
-import com.yggdrasil.labs.client.dto.permission.cmd.DeletePermissionCmd;
-import com.yggdrasil.labs.client.dto.permission.cmd.UpdatePermissionCmd;
-import com.yggdrasil.labs.client.dto.permission.co.PermissionCO;
-import com.yggdrasil.labs.client.dto.permission.query.GetPermissionQuery;
-import com.yggdrasil.labs.client.dto.permission.query.PagePermissionQuery;
+import com.yggdrasil.labs.app.service.PermissionApplicationService;
 
-/**
- * 权限客户端实现
- *
- * @author YoungerYang-Y
- */
+/** 权限应用服务实现 */
 @Service
-public class PermissionClientImpl implements PermissionClient {
+public class PermissionApplicationServiceImpl implements PermissionApplicationService {
 
     @Resource private CreatePermissionCmdExe createPermissionCmdExe;
 

@@ -19,8 +19,8 @@ import com.yggdrasil.labs.adapter.web.convert.ApiWebConverter;
 import com.yggdrasil.labs.adapter.web.request.CreateApiRequest;
 import com.yggdrasil.labs.adapter.web.request.PageApiRequest;
 import com.yggdrasil.labs.adapter.web.request.UpdateApiRequest;
-import com.yggdrasil.labs.client.api.ApiClient;
-import com.yggdrasil.labs.client.dto.api.co.ApiCO;
+import com.yggdrasil.labs.app.api.dto.co.ApiCO;
+import com.yggdrasil.labs.app.service.ApiApplicationService;
 
 /**
  * API控制器
@@ -31,7 +31,7 @@ import com.yggdrasil.labs.client.dto.api.co.ApiCO;
 @RequestMapping("/api/v1/apis")
 public class ApiController {
 
-    @Resource private ApiClient apiClient;
+    @Resource private ApiApplicationService apiApplicationService;
 
     @Resource private ApiWebConverter apiWebConverter;
 
@@ -43,7 +43,7 @@ public class ApiController {
      */
     @PostMapping
     public Response createApi(@Valid @RequestBody CreateApiRequest request) {
-        return apiClient.createApi(apiWebConverter.toCreateApiCmd(request));
+        return apiApplicationService.createApi(apiWebConverter.toCreateApiCmd(request));
     }
 
     /**
@@ -56,7 +56,7 @@ public class ApiController {
     @PutMapping("/{id}")
     public Response updateApi(@PathVariable Long id, @Valid @RequestBody UpdateApiRequest request) {
         request.setId(id);
-        return apiClient.updateApi(apiWebConverter.toUpdateApiCmd(request));
+        return apiApplicationService.updateApi(apiWebConverter.toUpdateApiCmd(request));
     }
 
     /**
@@ -67,7 +67,7 @@ public class ApiController {
      */
     @DeleteMapping("/{id}")
     public Response deleteApi(@PathVariable Long id) {
-        return apiClient.deleteApi(apiWebConverter.toDeleteApiCmd(id));
+        return apiApplicationService.deleteApi(apiWebConverter.toDeleteApiCmd(id));
     }
 
     /**
@@ -78,7 +78,7 @@ public class ApiController {
      */
     @GetMapping("/{id}")
     public SingleResponse<ApiCO> getApi(@PathVariable Long id) {
-        return apiClient.getApi(apiWebConverter.toGetApiQuery(id));
+        return apiApplicationService.getApi(apiWebConverter.toGetApiQuery(id));
     }
 
     /**
@@ -89,6 +89,6 @@ public class ApiController {
      */
     @GetMapping
     public PageResponse<ApiCO> pageApi(@Valid PageApiRequest request) {
-        return apiClient.pageApi(apiWebConverter.toPageApiQuery(request));
+        return apiApplicationService.pageApi(apiWebConverter.toPageApiQuery(request));
     }
 }

@@ -20,8 +20,8 @@ import com.yggdrasil.labs.adapter.web.request.AssignPermissionApiRequest;
 import com.yggdrasil.labs.adapter.web.request.CreatePermissionRequest;
 import com.yggdrasil.labs.adapter.web.request.PagePermissionRequest;
 import com.yggdrasil.labs.adapter.web.request.UpdatePermissionRequest;
-import com.yggdrasil.labs.client.api.PermissionClient;
-import com.yggdrasil.labs.client.dto.permission.co.PermissionCO;
+import com.yggdrasil.labs.app.permission.dto.co.PermissionCO;
+import com.yggdrasil.labs.app.service.PermissionApplicationService;
 
 /**
  * 权限控制器
@@ -32,7 +32,7 @@ import com.yggdrasil.labs.client.dto.permission.co.PermissionCO;
 @RequestMapping("/api/v1/permissions")
 public class PermissionController {
 
-    @Resource private PermissionClient permissionClient;
+    @Resource private PermissionApplicationService permissionApplicationService;
 
     @Resource private PermissionWebConverter permissionWebConverter;
 
@@ -44,7 +44,7 @@ public class PermissionController {
      */
     @PostMapping
     public Response createPermission(@Valid @RequestBody CreatePermissionRequest request) {
-        return permissionClient.createPermission(
+        return permissionApplicationService.createPermission(
                 permissionWebConverter.toCreatePermissionCmd(request));
     }
 
@@ -59,7 +59,7 @@ public class PermissionController {
     public Response updatePermission(
             @PathVariable Long id, @Valid @RequestBody UpdatePermissionRequest request) {
         request.setId(id);
-        return permissionClient.updatePermission(
+        return permissionApplicationService.updatePermission(
                 permissionWebConverter.toUpdatePermissionCmd(request));
     }
 
@@ -71,7 +71,8 @@ public class PermissionController {
      */
     @DeleteMapping("/{id}")
     public Response deletePermission(@PathVariable Long id) {
-        return permissionClient.deletePermission(permissionWebConverter.toDeletePermissionCmd(id));
+        return permissionApplicationService.deletePermission(
+                permissionWebConverter.toDeletePermissionCmd(id));
     }
 
     /**
@@ -82,7 +83,8 @@ public class PermissionController {
      */
     @GetMapping("/{id}")
     public SingleResponse<PermissionCO> getPermission(@PathVariable Long id) {
-        return permissionClient.getPermission(permissionWebConverter.toGetPermissionQuery(id));
+        return permissionApplicationService.getPermission(
+                permissionWebConverter.toGetPermissionQuery(id));
     }
 
     /**
@@ -93,7 +95,7 @@ public class PermissionController {
      */
     @GetMapping
     public PageResponse<PermissionCO> pagePermission(@Valid PagePermissionRequest request) {
-        return permissionClient.pagePermission(
+        return permissionApplicationService.pagePermission(
                 permissionWebConverter.toPagePermissionQuery(request));
     }
 
@@ -107,7 +109,7 @@ public class PermissionController {
     @PostMapping("/{id}/apis")
     public Response assignPermissionApi(
             @PathVariable Long id, @Valid @RequestBody AssignPermissionApiRequest request) {
-        return permissionClient.assignPermissionApi(
+        return permissionApplicationService.assignPermissionApi(
                 permissionWebConverter.toAssignPermissionApiCmd(id, request));
     }
 }

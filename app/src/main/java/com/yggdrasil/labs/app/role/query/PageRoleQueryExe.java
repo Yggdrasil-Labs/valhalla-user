@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.cola.dto.PageResponse;
 import com.yggdrasil.labs.app.role.assembler.RoleAssembler;
-import com.yggdrasil.labs.client.dto.role.co.RoleCO;
-import com.yggdrasil.labs.client.dto.role.query.PageRoleQuery;
+import com.yggdrasil.labs.app.role.dto.co.RoleCO;
+import com.yggdrasil.labs.app.role.dto.query.PageRoleQuery;
 import com.yggdrasil.labs.domain.common.PageResult;
 import com.yggdrasil.labs.domain.role.model.Role;
 import com.yggdrasil.labs.domain.role.repository.RoleRepository;

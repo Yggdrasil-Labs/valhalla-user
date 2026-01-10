@@ -5,10 +5,10 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.cola.dto.SingleResponse;
+import com.yggdrasil.labs.app.common.dto.enums.ErrorCode;
 import com.yggdrasil.labs.app.role.assembler.RoleAssembler;
-import com.yggdrasil.labs.client.dto.enums.ErrorCode;
-import com.yggdrasil.labs.client.dto.role.co.RoleCO;
-import com.yggdrasil.labs.client.dto.role.query.GetRoleQuery;
+import com.yggdrasil.labs.app.role.dto.co.RoleCO;
+import com.yggdrasil.labs.app.role.dto.query.GetRoleQuery;
 import com.yggdrasil.labs.domain.role.model.Role;
 import com.yggdrasil.labs.domain.role.repository.RoleRepository;
 
@@ -27,6 +27,7 @@ public class GetRoleQueryExe {
 
     @Resource private RoleAssembler roleAssembler;
 
+    @SuppressWarnings("unchecked")
     public SingleResponse<RoleCO> execute(GetRoleQuery query) {
         log.info("获取角色详情: roleId={}", query.getId());
 

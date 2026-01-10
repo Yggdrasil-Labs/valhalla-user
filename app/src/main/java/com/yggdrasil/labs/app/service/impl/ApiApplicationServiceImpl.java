@@ -1,4 +1,4 @@
-package com.yggdrasil.labs.app.api;
+package com.yggdrasil.labs.app.service.impl;
 
 import jakarta.annotation.Resource;
 
@@ -7,26 +7,22 @@ import org.springframework.stereotype.Service;
 import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
+import com.yggdrasil.labs.app.api.dto.cmd.CreateApiCmd;
+import com.yggdrasil.labs.app.api.dto.cmd.DeleteApiCmd;
+import com.yggdrasil.labs.app.api.dto.cmd.UpdateApiCmd;
+import com.yggdrasil.labs.app.api.dto.co.ApiCO;
+import com.yggdrasil.labs.app.api.dto.query.GetApiQuery;
+import com.yggdrasil.labs.app.api.dto.query.PageApiQuery;
 import com.yggdrasil.labs.app.api.executor.CreateApiCmdExe;
 import com.yggdrasil.labs.app.api.executor.DeleteApiCmdExe;
 import com.yggdrasil.labs.app.api.executor.UpdateApiCmdExe;
 import com.yggdrasil.labs.app.api.query.GetApiQueryExe;
 import com.yggdrasil.labs.app.api.query.PageApiQueryExe;
-import com.yggdrasil.labs.client.api.ApiClient;
-import com.yggdrasil.labs.client.dto.api.cmd.CreateApiCmd;
-import com.yggdrasil.labs.client.dto.api.cmd.DeleteApiCmd;
-import com.yggdrasil.labs.client.dto.api.cmd.UpdateApiCmd;
-import com.yggdrasil.labs.client.dto.api.co.ApiCO;
-import com.yggdrasil.labs.client.dto.api.query.GetApiQuery;
-import com.yggdrasil.labs.client.dto.api.query.PageApiQuery;
+import com.yggdrasil.labs.app.service.ApiApplicationService;
 
-/**
- * API客户端实现
- *
- * @author YoungerYang-Y
- */
+/** API应用服务实现 */
 @Service
-public class ApiClientImpl implements ApiClient {
+public class ApiApplicationServiceImpl implements ApiApplicationService {
 
     @Resource private CreateApiCmdExe createApiCmdExe;
 

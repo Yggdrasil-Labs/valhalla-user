@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
-import com.yggdrasil.labs.client.dto.api.co.ApiCO;
+import com.yggdrasil.labs.app.api.dto.co.ApiCO;
 import com.yggdrasil.labs.domain.api.model.Api;
 
 /**

@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
-import com.yggdrasil.labs.client.dto.permission.co.PermissionCO;
+import com.yggdrasil.labs.app.permission.dto.co.PermissionCO;
 import com.yggdrasil.labs.domain.permission.model.Permission;
 
 /**

@@ -6,11 +6,11 @@ import org.mapstruct.factory.Mappers;
 import com.yggdrasil.labs.adapter.web.request.CreateApiRequest;
 import com.yggdrasil.labs.adapter.web.request.PageApiRequest;
 import com.yggdrasil.labs.adapter.web.request.UpdateApiRequest;
-import com.yggdrasil.labs.client.dto.api.cmd.CreateApiCmd;
-import com.yggdrasil.labs.client.dto.api.cmd.DeleteApiCmd;
-import com.yggdrasil.labs.client.dto.api.cmd.UpdateApiCmd;
-import com.yggdrasil.labs.client.dto.api.query.GetApiQuery;
-import com.yggdrasil.labs.client.dto.api.query.PageApiQuery;
+import com.yggdrasil.labs.app.api.dto.cmd.CreateApiCmd;
+import com.yggdrasil.labs.app.api.dto.cmd.DeleteApiCmd;
+import com.yggdrasil.labs.app.api.dto.cmd.UpdateApiCmd;
+import com.yggdrasil.labs.app.api.dto.query.GetApiQuery;
+import com.yggdrasil.labs.app.api.dto.query.PageApiQuery;
 
 /**
  * API Web转换器

@@ -13,10 +13,10 @@
     <name>adapter</name>
 
     <dependencies>
-        <!-- 适配层只依赖对外契约（client），不直接依赖应用实现（app） -->
+        <!-- 适配层依赖应用服务（app）以调用编排后的业务能力 -->
         <dependency>
             <groupId>com.yggdrasil.labs</groupId>
-            <artifactId>client</artifactId>
+            <artifactId>app</artifactId>
         </dependency>
 
         <!-- COLA DTO：用于 Response、SingleResponse、MultiResponse 等 -->

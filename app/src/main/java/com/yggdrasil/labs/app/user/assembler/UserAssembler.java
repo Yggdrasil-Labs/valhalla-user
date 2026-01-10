@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
-import com.yggdrasil.labs.client.dto.user.co.UserCO;
+import com.yggdrasil.labs.app.user.dto.co.UserCO;
 import com.yggdrasil.labs.domain.user.model.User;
 import com.yggdrasil.labs.domain.user.model.UserStatus;
 

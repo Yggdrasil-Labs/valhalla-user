@@ -8,8 +8,8 @@
  * <ul>
  *   <li>接收外部请求并适配到内部接口（入站适配器）
  *   <li>处理各种协议的输入输出（HTTP、RPC、MQ、定时任务等）
- *   <li>将外部请求转换为 Command 或 Query
- *   <li>调用 Client 层接口并返回结果
+ *   <li>将外部请求转换为 App 层的 Command 或 Query
+ *   <li>直接调用 ApplicationService 并返回结果
  * </ul>
  *
  * <p><b>包结构：</b>
@@ -62,9 +62,9 @@
  *   ↓ [Jackson 反序列化]
  * Request DTO (Adapter)
  *   ↓ [Converter - MapStruct]
- * Command/Query (Client)
- *   ↓ [调用 Client API]
- * Response/CO (Client)
+ * Command/Query (App)
+ *   ↓ [调用 ApplicationService]
+ * Response/CO (App)
  *   ↓ [Jackson 序列化]
  * HTTP Response (JSON)
  * </pre>
@@ -72,8 +72,8 @@
  * <p><b>依赖关系：</b>
  *
  * <ul>
- *   <li><b>依赖</b>：依赖 Client 层接口和 DTO
- *   <li><b>不依赖</b>：不直接依赖 App、Domain、Infrastructure 层
+ *   <li><b>依赖</b>：依赖 App 层 ApplicationService 与 DTO
+ *   <li><b>不依赖</b>：不直接依赖 Domain、Infrastructure 层
  *   <li><b>被依赖</b>：Start 层依赖 Adapter 层（扫描 Controller 等）
  * </ul>
  *

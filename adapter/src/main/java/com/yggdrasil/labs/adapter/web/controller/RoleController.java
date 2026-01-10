@@ -20,8 +20,8 @@ import com.yggdrasil.labs.adapter.web.request.AssignRolePermissionRequest;
 import com.yggdrasil.labs.adapter.web.request.CreateRoleRequest;
 import com.yggdrasil.labs.adapter.web.request.PageRoleRequest;
 import com.yggdrasil.labs.adapter.web.request.UpdateRoleRequest;
-import com.yggdrasil.labs.client.api.RoleClient;
-import com.yggdrasil.labs.client.dto.role.co.RoleCO;
+import com.yggdrasil.labs.app.role.dto.co.RoleCO;
+import com.yggdrasil.labs.app.service.RoleApplicationService;
 
 /**
  * 角色控制器
@@ -32,7 +32,7 @@ import com.yggdrasil.labs.client.dto.role.co.RoleCO;
 @RequestMapping("/api/v1/roles")
 public class RoleController {
 
-    @Resource private RoleClient roleClient;
+    @Resource private RoleApplicationService roleApplicationService;
 
     @Resource private RoleWebConverter roleWebConverter;
 
@@ -44,7 +44,7 @@ public class RoleController {
      */
     @PostMapping
     public Response createRole(@Valid @RequestBody CreateRoleRequest request) {
-        return roleClient.createRole(roleWebConverter.toCreateRoleCmd(request));
+        return roleApplicationService.createRole(roleWebConverter.toCreateRoleCmd(request));
     }
 
     /**
@@ -58,7 +58,7 @@ public class RoleController {
     public Response updateRole(
             @PathVariable Long id, @Valid @RequestBody UpdateRoleRequest request) {
         request.setId(id);
-        return roleClient.updateRole(roleWebConverter.toUpdateRoleCmd(request));
+        return roleApplicationService.updateRole(roleWebConverter.toUpdateRoleCmd(request));
     }
 
     /**
@@ -69,7 +69,7 @@ public class RoleController {
      */
     @DeleteMapping("/{id}")
     public Response deleteRole(@PathVariable Long id) {
-        return roleClient.deleteRole(roleWebConverter.toDeleteRoleCmd(id));
+        return roleApplicationService.deleteRole(roleWebConverter.toDeleteRoleCmd(id));
     }
 
     /**
@@ -80,7 +80,7 @@ public class RoleController {
      */
     @GetMapping("/{id}")
     public SingleResponse<RoleCO> getRole(@PathVariable Long id) {
-        return roleClient.getRole(roleWebConverter.toGetRoleQuery(id));
+        return roleApplicationService.getRole(roleWebConverter.toGetRoleQuery(id));
     }
 
     /**
@@ -91,7 +91,7 @@ public class RoleController {
      */
     @GetMapping
     public PageResponse<RoleCO> pageRole(@Valid PageRoleRequest request) {
-        return roleClient.pageRole(roleWebConverter.toPageRoleQuery(request));
+        return roleApplicationService.pageRole(roleWebConverter.toPageRoleQuery(request));
     }
 
     /**
@@ -104,7 +104,7 @@ public class RoleController {
     @PostMapping("/{id}/permissions")
     public Response assignRolePermission(
             @PathVariable Long id, @Valid @RequestBody AssignRolePermissionRequest request) {
-        return roleClient.assignRolePermission(
+        return roleApplicationService.assignRolePermission(
                 roleWebConverter.toAssignRolePermissionCmd(id, request));
     }
 }

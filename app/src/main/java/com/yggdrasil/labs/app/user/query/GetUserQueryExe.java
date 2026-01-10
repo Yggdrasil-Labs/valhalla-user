@@ -5,10 +5,10 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.cola.dto.SingleResponse;
+import com.yggdrasil.labs.app.common.dto.enums.ErrorCode;
 import com.yggdrasil.labs.app.user.assembler.UserAssembler;
-import com.yggdrasil.labs.client.dto.enums.ErrorCode;
-import com.yggdrasil.labs.client.dto.user.co.UserCO;
-import com.yggdrasil.labs.client.dto.user.query.GetUserQuery;
+import com.yggdrasil.labs.app.user.dto.co.UserCO;
+import com.yggdrasil.labs.app.user.dto.query.GetUserQuery;
 import com.yggdrasil.labs.domain.user.model.User;
 import com.yggdrasil.labs.domain.user.repository.UserRepository;
 
@@ -27,6 +27,7 @@ public class GetUserQueryExe {
 
     @Resource private UserAssembler userAssembler;
 
+    @SuppressWarnings("unchecked")
     public SingleResponse<UserCO> execute(GetUserQuery query) {
         log.info("获取用户详情: userId={}", query.getId());
 
