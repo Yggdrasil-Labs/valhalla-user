@@ -8,9 +8,9 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>client</artifactId>
+    <artifactId>valhalla-user-client</artifactId>
     <packaging>jar</packaging>
-    <name>client</name>
+    <name>valhalla-user-client</name>
 
     <dependencies>
         <dependency>

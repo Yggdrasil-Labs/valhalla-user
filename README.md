@@ -57,13 +57,13 @@ Valhalla（英灵殿）用户管理服务，是 Yggdrasil Labs 生态系统中�
 
 ```bash
 # 1. 配置数据库和 Redis
-# 修改 start/src/main/resources/application-dev.yml
+# 修改 valhalla-user-start/src/main/resources/application-dev.yml
 
-# 2. 启动服务
-./mvnw spring-boot:run
+# 2. 启动服务（从根目录需指定启动模块）
+./mvnw spring-boot:run -pl valhalla-user-start
 
 # 或使用 Maven
-mvn spring-boot:run
+mvn spring-boot:run -pl valhalla-user-start
 ```
 
 ### 开发文档

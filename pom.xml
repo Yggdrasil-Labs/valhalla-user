@@ -32,12 +32,12 @@
     </properties>
 
     <modules>
-        <module>client</module>
-        <module>adapter</module>
-        <module>app</module>
-        <module>domain</module>
-        <module>infrastructure</module>
-        <module>start</module>
+        <module>valhalla-user-client</module>
+        <module>valhalla-user-adapter</module>
+        <module>valhalla-user-app</module>
+        <module>valhalla-user-domain</module>
+        <module>valhalla-user-infrastructure</module>
+        <module>valhalla-user-start</module>
     </modules>
 
     <dependencies>
@@ -87,27 +87,32 @@
             <!--Project modules-->
             <dependency>
                 <groupId>io.github.yggdrasil-labs</groupId>
-                <artifactId>adapter</artifactId>
+                <artifactId>valhalla-user-adapter</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.yggdrasil-labs</groupId>
-                <artifactId>client</artifactId>
+                <artifactId>valhalla-user-client</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.yggdrasil-labs</groupId>
-                <artifactId>app</artifactId>
+                <artifactId>valhalla-user-app</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.yggdrasil-labs</groupId>
-                <artifactId>domain</artifactId>
+                <artifactId>valhalla-user-domain</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.yggdrasil-labs</groupId>
-                <artifactId>infrastructure</artifactId>
+                <artifactId>valhalla-user-infrastructure</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.yggdrasil-labs</groupId>
+                <artifactId>valhalla-user-start</artifactId>
                 <version>${revision}</version>
             </dependency>
             <!--Project modules End-->

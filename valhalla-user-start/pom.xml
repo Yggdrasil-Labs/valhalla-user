@@ -9,27 +9,27 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>start</artifactId>
+    <artifactId>valhalla-user-start</artifactId>
     <packaging>jar</packaging>
-    <name>start</name>
+    <name>valhalla-user-start</name>
 
     <dependencies>
         <!-- 启动层聚合所有业务模块，但自身不写业务逻辑 -->
         <dependency>
             <groupId>io.github.yggdrasil-labs</groupId>
-            <artifactId>adapter</artifactId>
+            <artifactId>valhalla-user-adapter</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.yggdrasil-labs</groupId>
-            <artifactId>app</artifactId>
+            <artifactId>valhalla-user-app</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.yggdrasil-labs</groupId>
-            <artifactId>domain</artifactId>
+            <artifactId>valhalla-user-domain</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.yggdrasil-labs</groupId>
-            <artifactId>infrastructure</artifactId>
+            <artifactId>valhalla-user-infrastructure</artifactId>
         </dependency>
 
         <!-- 基础技术 Starter -->
