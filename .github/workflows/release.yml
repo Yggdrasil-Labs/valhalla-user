@@ -16,7 +16,7 @@ jobs:
       contents: read
       packages: read
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           # push 事件时，使用 github.ref（已经是 tag ref）
           ref: ${{ github.ref }}
@@ -67,7 +67,7 @@ jobs:
       contents: read
       packages: read
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           # push 事件时，使用 github.ref（已经是 tag ref）
           ref: ${{ github.ref }}
@@ -177,7 +177,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           ref: ${{ github.ref }}
           fetch-depth: 0
@@ -292,7 +292,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
