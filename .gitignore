@@ -37,7 +37,6 @@ doc/
 .vscode/
 
 ### AI ###
-.cursor/
-openspec/
+
 
 application-local.yml
