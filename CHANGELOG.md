@@ -1,5 +1,49 @@
 # Changelog
 
+## [1.1.1](https://github.com/Yggdrasil-Labs/valhalla-user/compare/v1.1.0...v1.1.1) (2026-09-05)
+
+
+### 📝 Documentation
+
+* **init:** 初始化文档体系 ([ebc1882](https://github.com/Yggdrasil-Labs/valhalla-user/commit/ebc1882b2035ed9b7e536e222e55244b8a105bdf))
+
+
+### ♻️ Code Refactoring
+
+* 子模块目录已重命名为 valhalla-user-* ([210ed7f](https://github.com/Yggdrasil-Labs/valhalla-user/commit/210ed7f8b04c0641979ecd2ee10b4b59085cc88f))
+* 适配层重构，依赖关系调整为直接依赖应用层，更新相关DTO和命令类以支持新的架构 ([99748d1](https://github.com/Yggdrasil-Labs/valhalla-user/commit/99748d16bdce62e0e2f966c83d79c4e593d4a0de))
+
+
+### ✅ Tests
+
+* 添加 app 与 domain 层单元测试 ([1ff6efc](https://github.com/Yggdrasil-Labs/valhalla-user/commit/1ff6efc2482a505d51eaa0fa1be9881cba431101))
+
+
+### 👷 Continuous Integration
+
+* **deps:** bump actions/checkout from 6.0.1 to 6.0.2 ([a74755c](https://github.com/Yggdrasil-Labs/valhalla-user/commit/a74755c12d1c84057ac3ee12b5ec133dd67d44a9))
+* **deps:** bump actions/checkout from 6.0.2 to 7.0.0 ([#31](https://github.com/Yggdrasil-Labs/valhalla-user/issues/31)) ([5a82a8f](https://github.com/Yggdrasil-Labs/valhalla-user/commit/5a82a8fac3b87394735d06076329af99ef82ba32))
+* **deps:** bump actions/checkout from 7.0.0 to 7.0.1 ([#36](https://github.com/Yggdrasil-Labs/valhalla-user/issues/36)) ([d27d0a2](https://github.com/Yggdrasil-Labs/valhalla-user/commit/d27d0a24d3029c39e233c07c1d276f402e566b97))
+* **deps:** bump actions/github-script from 8.0.0 to 9.0.0 ([a481462](https://github.com/Yggdrasil-Labs/valhalla-user/commit/a481462a75a702f4279ad59ac09abfa014497066))
+* **deps:** bump googleapis/release-please-action from 4.4.0 to 4.4.1 ([e7d805d](https://github.com/Yggdrasil-Labs/valhalla-user/commit/e7d805d3616b82f7a47578ece79fe006dbd70afe))
+* **deps:** bump googleapis/release-please-action from 4.4.1 to 5.0.0 ([54de33f](https://github.com/Yggdrasil-Labs/valhalla-user/commit/54de33fe7b623f2886a440662ca675a7867a3615))
+* **deps:** bump softprops/action-gh-release from 2.5.0 to 3.0.0 ([1da7c53](https://github.com/Yggdrasil-Labs/valhalla-user/commit/1da7c538fe35c36187e151a089dd3ca5318ecc43))
+* **deps:** bump softprops/action-gh-release from 3.0.0 to 3.0.1 ([#30](https://github.com/Yggdrasil-Labs/valhalla-user/issues/30)) ([215a7ce](https://github.com/Yggdrasil-Labs/valhalla-user/commit/215a7ce3a8ef5ebcc25c6f33a4e457e559bebcfe))
+* **deps:** bump softprops/action-gh-release from 3.0.1 to 3.0.2 ([#35](https://github.com/Yggdrasil-Labs/valhalla-user/issues/35)) ([6eba509](https://github.com/Yggdrasil-Labs/valhalla-user/commit/6eba509fe2ac1f401259bbd816076124e3ef93c3))
+
+
+### 🔧 Miscellaneous Chores
+
+* bump version to 1.1.1-SNAPSHOT for next development cycle ([15ec2c0](https://github.com/Yggdrasil-Labs/valhalla-user/commit/15ec2c0acfb2298940b030099e18f421ec5d75fe))
+* **deps-dev:** bump com.diffplug.spotless:spotless-maven-plugin ([e232357](https://github.com/Yggdrasil-Labs/valhalla-user/commit/e23235741c2bf7769ac5fc57a3f4f129d22bf950))
+* **deps-dev:** bump com.diffplug.spotless:spotless-maven-plugin ([#34](https://github.com/Yggdrasil-Labs/valhalla-user/issues/34)) ([38ada8a](https://github.com/Yggdrasil-Labs/valhalla-user/commit/38ada8a14b078a29f631a5f183f4c85b4ab0cd1d))
+* **deps-dev:** bump com.diffplug.spotless:spotless-maven-plugin ([#38](https://github.com/Yggdrasil-Labs/valhalla-user/issues/38)) ([117faf6](https://github.com/Yggdrasil-Labs/valhalla-user/commit/117faf6ce7864ff0b832e05c7d26644b7c428d77))
+* **deps:** bump io.github.yggdrasil-labs:mimir-boot-bom ([#32](https://github.com/Yggdrasil-Labs/valhalla-user/issues/32)) ([057ecc6](https://github.com/Yggdrasil-Labs/valhalla-user/commit/057ecc606baed06f75e022dbf542523898c4a76b))
+* **deps:** bump io.github.yggdrasil-labs:mimir-boot-parent ([#33](https://github.com/Yggdrasil-Labs/valhalla-user/issues/33)) ([0e0dedc](https://github.com/Yggdrasil-Labs/valhalla-user/commit/0e0dedc572c451b3156823fb61faf416d30b8c17))
+* **deps:** bump the mimir-boot group with 2 updates ([6c3b4d5](https://github.com/Yggdrasil-Labs/valhalla-user/commit/6c3b4d5753c59edd98530a2f653ecbfd9cca139a))
+* update spotless-maven-plugin version to 3.2.1 ([11a6227](https://github.com/Yggdrasil-Labs/valhalla-user/commit/11a622741841d1eb93f9feef987f4d9961bed83b))
+* 将 POM 文件和脚本中的 groupId 从 com.yggdrasil.labs 更新为 io.github.yggdrasil-labs，并更改构建脚本的文件权限 ([4a3fc15](https://github.com/Yggdrasil-Labs/valhalla-user/commit/4a3fc15004c18d038cff5d71a98aea11d081d33f))
+
 ## [1.1.0](https://github.com/Yggdrasil-Labs/valhalla-user/compare/v1.0.0...v1.1.0) (2025-12-28)
 
 
